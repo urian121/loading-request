@@ -80,10 +80,10 @@ Licensed under MIT
 
 ## Desarrollado por
 
-[Urian Viera](https://github.com/urian123)
-[Mi portafolio](https://www.urianviera.com)
-[Canal de Youtube](https://www.youtube.com/WebDeveloperUrianViera)
-[¡Donar a través de PayPal!](https://www.paypal.com/donate/?hosted_button_id=4SV78MQJJH3VE)
-[Email](mailto:urian1213viera@gmail.com)
+- [Urian Viera](https://github.com/urian123)
+- [Mi portafolio](https://www.urianviera.com)
+- [Canal de Youtube](https://www.youtube.com/WebDeveloperUrianViera)
+- [¡Donar a través de PayPal!](https://www.paypal.com/donate/?hosted_button_id=4SV78MQJJH3VE)
+- [Email](mailto:urian1213viera@gmail.com)
 
-- Da las gracias aquí 🤓
+Da las gracias aquí 🤓
