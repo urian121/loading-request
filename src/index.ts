@@ -38,7 +38,7 @@ const showLoading = ({
  * Oculta el indicador de carga después de un tiempo especificado.
  * @param timeLoading Tiempo en milisegundos antes de ocultar el indicador. Por defecto es 400ms.
  */
-const hideLoading = ({ timeLoading = 400 }: HideLoadingOptions = {}) => {
+const hideLoading = ({ timeLoading = 500 }: HideLoadingOptions = {}) => {
   const loadingOverlay = document.querySelector(".page-loading.active");
   if (loadingOverlay) {
     setTimeout(() => {
