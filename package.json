@@ -1,0 +1,33 @@
+{
+  "name": "universal-loading",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "rollup -c -w",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c"
+  },
+  "keywords": [
+    "loading",
+    "spinner",
+    "progress",
+    "react",
+    "vue",
+    "angular",
+    "svelte",
+    "universal"
+  ],
+  "author": "Urian Viera",
+  "license": "ISC",
+  "description": "Un paquete universal para mostrar indicadores de carga (spinners) en aplicaciones web compatibles con diferentes frameworks como React, Vue, Angular, Svelte, etc.",
+  "devDependencies": {
+    "@types/node": "^20.14.9",
+    "rollup": "^4.18.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "typescript": "^5.5.3"
+  }
+}
