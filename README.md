@@ -23,8 +23,13 @@ yarn add loading-request
 
     const App = () => {
     const handleShowLoading = () => {
-        showLoading('Cargando...');
-        hideLoading(600);
+        showLoading({
+            message: "Cargando...",
+            spinnerColor: "#ff0000",
+            textLoadingColor: "#222",
+        });
+
+        hideLoading({ timeLoading: 1500 });
     };
 
     return (

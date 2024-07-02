@@ -1,5 +1,5 @@
 import "./loading.css"; // Importando el archivo CSS
-import { ShowLoadingOptions, HideLoadingOptions } from "../interface/interface";
+import { ShowLoadingOptions, HideLoadingOptions } from "../types/index";
 
 /**
  * Muestra un indicador de carga con opciones personalizables.
