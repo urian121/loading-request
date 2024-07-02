@@ -5,6 +5,10 @@
 
 Un paquete para mostrar indicadores de carga durante solicitudes o procesos en aplicaciones web. Ideal para mostrar un spinner o indicador de carga al hacer una solicitud a una API REST, enviar un formulario, navegar entre páginas o secciones de un menú, y otros casos similares. Compatible con varios frameworks como React, Vue, Angular, Svelte, Next, JavaScript y más.
 
+## Demo
+
+![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/Loading-Request-formulario.gif)
+
 ## Instalación
 
     $ npm install loading-request --save
