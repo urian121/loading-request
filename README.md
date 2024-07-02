@@ -24,9 +24,7 @@ yarn add loading-request
     const App = () => {
     const handleShowLoading = () => {
         showLoading('Cargando...');
-        setTimeout(() => {
-        hideLoading();
-        }, 1500);
+        hideLoading(600);
     };
 
     return (

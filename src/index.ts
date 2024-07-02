@@ -1,10 +1,18 @@
-import "./loading.css";
+import "./loading.css"; // Importando el archivo CSS
+import { ShowLoadingOptions, HideLoadingOptions } from "../interface/interface";
 
-const showLoading = (
-  message: string = "Loading...",
-  spinnerColor?: string,
-  textLoadingColor?: string
-) => {
+/**
+ * Muestra un indicador de carga con opciones personalizables.
+ * En caso de que no se pase ningún objeto al llamar a la función showLoading, se utilizará un objeto vacío como valor por defecto.
+ * @param message Mensaje opcional que se muestra junto al indicador de carga. Por defecto es "Cargando...".
+ * @param spinnerColor Color opcional del borde del spinner. Si se proporciona, se aplica dinámicamente.
+ * @param textLoadingColor Color opcional del texto del mensaje de carga. Si se proporciona, se aplica dinámicamente.
+ */
+const showLoading = ({
+  message = "Cargando...",
+  spinnerColor,
+  textLoadingColor,
+}: ShowLoadingOptions = {}) => {
   const loadingOverlay = document.createElement("div");
   loadingOverlay.className = "page-loading active";
 
@@ -26,7 +34,11 @@ const showLoading = (
   document.body.appendChild(loadingOverlay);
 };
 
-const hideLoading = (timeLoading: number = 400) => {
+/**
+ * Oculta el indicador de carga después de un tiempo especificado.
+ * @param timeLoading Tiempo en milisegundos antes de ocultar el indicador. Por defecto es 400ms.
+ */
+const hideLoading = ({ timeLoading = 400 }: HideLoadingOptions = {}) => {
   const loadingOverlay = document.querySelector(".page-loading.active");
   if (loadingOverlay) {
     setTimeout(() => {
@@ -38,4 +50,5 @@ const hideLoading = (timeLoading: number = 400) => {
   }
 };
 
+// Eportando las funciones para que puedan ser utilizadas en otros archivos
 export { showLoading, hideLoading };
