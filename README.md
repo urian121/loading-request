@@ -1,7 +1,6 @@
 # Loading Request
 
 [![npm version](https://img.shields.io/npm/v/loading-request.svg?style=flat-square)](https://www.npmjs.com/package/loading-request)
-
 [![GitHub Repo](https://img.shields.io/badge/repository-GitHub-blue?style=flat-square&logo=github)](https://github.com/urian121/loading-request)
 
 Un paquete para mostrar indicadores de carga durante solicitudes o procesos en aplicaciones web. Ideal para mostrar un spinner o indicador de carga al hacer una solicitud a una API REST, enviar un formulario, navegar entre páginas o secciones de un menú, y otros casos similares. Compatible con varios frameworks como React, Vue, Angular, Svelte, Next, JavaScript y más.
@@ -108,23 +107,24 @@ export default function ApiSimpson() {
 
 #### showLoading(opciones?: ShowLoadingOptions)
 
-Es una función donde todos sus métodos son opcionales.
+Es una función que permite mostrar un indicador de carga con opciones personalizables.
 
-- Entre ellos tenemos:
-
+- **Opciones**:
   - message: Mensaje que se muestra junto al indicador de carga. Por defecto es "Cargando...".
   - spinnerColor: Color opcional del borde del spinner. Si se proporciona, se aplica dinámicamente.
   - textLoadingColor: Color opcional del texto del mensaje de carga. Si se proporciona, se aplica dinámicamente.
 
-Recibe un objeto de configuración opcional, si no se proporciona un objeto de configuración, se utilizará un objeto vacío como valor por defecto.
+Recibe un objeto de configuración opcional. Si no se proporciona ningún argumento, se utilizará un objeto vacío como valor por defecto.
 
-```jsx
+**Ejemplo de uso**:
+
+````jsx
 showLoading({
   message: "Cargando...",
   spinnerColor: "#f3752b",
   textLoadingColor: "#EE5E09",
 });
-```
+
 
 #### hideLoading(opciones?: HideLoadingOptions)
 
@@ -140,15 +140,11 @@ Si se llama sin argumentos, se utilizará un objeto vacío como valor por defect
 
 ```jsx
 hideLoading({ timeLoading: 1500 });
-```
+````
 
 ### Contribuir
 
 Si encuentras algún problema o tienes una idea para mejorar el paquete, por favor abre un issue o envía un pull request en GitHub: https://github.com/urian121/loading-request
-
-## License
-
-Licensed under MIT
 
 ## Desarrollado por
 
@@ -162,6 +158,12 @@ Licensed under MIT
 
 © 2024 Urian Viera. Todos los derechos reservados.
 
-[Repositorio](https://github.com/urian121/loading-request)
+## License
 
-Da las gracias 🤓
+Licensed under MIT
+
+[![GitHub](https://img.shields.io/badge/GitHub-urian121/loading--request-181717?logo=github&style=flat-square)](https://github.com/urian121/loading-request)
+
+## Agradecimientos
+
+¡Gracias a todos los Devs 👨‍💻 que han utilizado y contribuido al desarrollo de **Loading Request**! Su apoyo y retroalimentación son fundamentales para mejorar continuamente este paquete.
