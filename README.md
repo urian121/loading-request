@@ -27,7 +27,7 @@ Un paquete para mostrar indicadores de carga durante solicitudes o procesos en a
 - Actualizaciones regulares: Mantenido activamente con mejoras y actualizaciones periódicas.
 - Licencia abierta: Publicado bajo licencia ISC, permitiendo su uso en proyectos comerciales y personales sin restricciones.
 
-#### Ejemplo Práctico en React.js
+## Ejemplo Práctico en React.js
 
 ```jsx
 import { showLoading, hideLoading } from "loading-request";
@@ -50,23 +50,72 @@ const App = () => {
 export default App;
 ```
 
+## Ejemplo Práctico en Next.js
+
+```jsx
+"use client";
+import { useState } from "react";
+import { getSimpson } from "../actions/getSimpson";
+import Image from "next/image";
+
+import { showLoading, hideLoading } from "loading-request";
+import "loading-request/dist/index.css";
+
+export default function ApiSimpson() {
+  const [data, setData] = useState(null);
+
+  const handleGetSimpson = async () => {
+    showLoading({ message: "Cargando API..." });
+    try {
+      const data = await getSimpson();
+      setData(data);
+    } catch (error) {
+      console.error("Error al obtener los datos:", error);
+    } finally {
+      hideLoading();
+    }
+  };
+
+  return (
+    <>
+      <button className="my-4" onClick={handleGetSimpson}>
+        Obtener personajes
+      </button>
+
+      {data && (
+        <div className="cards">
+          {data.map((personaje, index) => (
+            <div key={index} className="card">
+              <div>{personaje.character}</div>
+              <Image width={200} height={200} src={personaje.image} alt={personaje.character} />
+            </div>
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+```
+
+[Código](https://github.com/urian121/loading-request-con-nextjs)
+
 ## API
 
-#### showLoading(options?: ShowLoadingOptions)
+#### showLoading(opciones?: ShowLoadingOptions)
 
 Es una función donde todos sus métodos son opcionales. Entre ellos tenemos:
 
-- options:
+- opciones:
 
   - message: Mensaje que se muestra junto al indicador de carga. Por defecto es "Cargando...".
   - spinnerColor: Color opcional del borde del spinner. Si se proporciona, se aplica dinámicamente.
   - textLoadingColor: Color opcional del texto del mensaje de carga. Si se proporciona, se aplica dinámicamente.
 
-#### hideLoading(options?: HideLoadingOptions)
+#### hideLoading(opciones?: HideLoadingOptions)
 
 Es una función que solo puede recibir un objeto de configuración opcional. Oculta el indicador de carga después de un tiempo especificado.
 
-- options:
+- opciones:
 
   - timeLoading: Tiempo en milisegundos antes de ocultar el indicador. Por defecto es 500ms.
 
