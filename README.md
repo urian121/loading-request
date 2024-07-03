@@ -31,14 +31,14 @@ Un paquete para mostrar indicadores de carga durante solicitudes o procesos en a
 
 ```jsx
 import { showLoading, hideLoading } from "loading-request";
-import "loading-request/dist/index.cjs.css";
+import "loading-request/dist/index.css";
 
 const App = () => {
   const handleShowLoading = () => {
     showLoading({
       message: "Cargando...",
-      spinnerColor: "#ff0000",
-      textLoadingColor: "#222",
+      spinnerColor: "#f3752b",
+      textLoadingColor: "#EE5E09",
     });
 
     hideLoading({ timeLoading: 1500 });

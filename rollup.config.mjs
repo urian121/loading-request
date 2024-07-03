@@ -18,7 +18,14 @@ export default {
       tsconfig: "./tsconfig.json",
     }),
     postcss({
-      extract: true, // Extrae el CSS a un archivo separado
+      extract: "index.css",
+      minimize: true, // Minimize CSS
+      modules: false, // No necesitas módulos CSS para un archivo CSS global
+      use: ["sass"], // Cambiado de "css" a "sass" para mayor flexibilidad
+      extensions: [".css", ".scss"], // Extensiones de archivo soportadas
+      inject: {
+        insertAt: "top", // Opcional: dónde insertar el CSS en el documento
+      },
     }),
   ],
 };
