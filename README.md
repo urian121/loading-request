@@ -1,7 +1,8 @@
 # Loading Request
 
 [![npm version](https://img.shields.io/npm/v/loading-request.svg?style=flat-square)](https://www.npmjs.com/package/loading-request)
-[![License](https://img.shields.io/github/license/urian121/loading-request.svg)](https://github.com/urian121/loading-request/blob/master/LICENSE.txt)
+
+[![GitHub Repo](https://img.shields.io/badge/repository-GitHub-blue?style=flat-square&logo=github)](https://github.com/urian121/loading-request)
 
 Un paquete para mostrar indicadores de carga durante solicitudes o procesos en aplicaciones web. Ideal para mostrar un spinner o indicador de carga al hacer una solicitud a una API REST, enviar un formulario, navegar entre páginas o secciones de un menú, y otros casos similares. Compatible con varios frameworks como React, Vue, Angular, Svelte, Next, JavaScript y más.
 
@@ -101,31 +102,49 @@ export default function ApiSimpson() {
 
 ![](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/loading-request-con-nextjs.gif)
 
-[Código](https://github.com/urian121/loading-request-con-nextjs)
+👉 [Código](https://github.com/urian121/loading-request-con-nextjs)
 
 ## API
 
 #### showLoading(opciones?: ShowLoadingOptions)
 
-Es una función donde todos sus métodos son opcionales. Entre ellos tenemos:
+Es una función donde todos sus métodos son opcionales.
 
-- opciones:
+- Entre ellos tenemos:
 
   - message: Mensaje que se muestra junto al indicador de carga. Por defecto es "Cargando...".
   - spinnerColor: Color opcional del borde del spinner. Si se proporciona, se aplica dinámicamente.
   - textLoadingColor: Color opcional del texto del mensaje de carga. Si se proporciona, se aplica dinámicamente.
 
+Recibe un objeto de configuración opcional, si no se proporciona un objeto de configuración, se utilizará un objeto vacío como valor por defecto.
+
+```jsx
+showLoading({
+  message: "Cargando...",
+  spinnerColor: "#f3752b",
+  textLoadingColor: "#EE5E09",
+});
+```
+
 #### hideLoading(opciones?: HideLoadingOptions)
 
-Es una función que solo puede recibir un objeto de configuración opcional. Oculta el indicador de carga después de un tiempo especificado.
+Es una función que permite ocultar el indicador de carga después de un período de tiempo especificado.
 
-- opciones:
+- **Parámetros**:
+  - opciones: Un objeto opcional que puede contener:
+    - timeLoading: Tiempo en milisegundos antes de ocultar el indicador. Por defecto es 500ms.
 
-  - timeLoading: Tiempo en milisegundos antes de ocultar el indicador. Por defecto es 500ms.
+Si se llama sin argumentos, se utilizará un objeto vacío como valor por defecto.
+
+**Ejemplo de uso**:
+
+```jsx
+hideLoading({ timeLoading: 1500 });
+```
 
 ### Contribuir
 
-    Si encuentras algún problema o tienes una idea para mejorar el paquete, por favor abre un issue o envía un pull request en GitHub: https://github.com/urian121/loading-request
+Si encuentras algún problema o tienes una idea para mejorar el paquete, por favor abre un issue o envía un pull request en GitHub: https://github.com/urian121/loading-request
 
 ## License
 
@@ -139,4 +158,10 @@ Licensed under MIT
 - [¡Donar a través de PayPal!](https://www.paypal.com/donate/?hosted_button_id=4SV78MQJJH3VE)
 - [Email](mailto:urian1213viera@gmail.com)
 
-Da las gracias aquí 🤓
+## Copyright
+
+© 2024 Urian Viera. Todos los derechos reservados.
+
+[Repositorio](https://github.com/urian121/loading-request)
+
+Da las gracias 🤓
