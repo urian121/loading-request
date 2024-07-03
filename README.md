@@ -5,7 +5,7 @@
 
 Un paquete para mostrar indicadores de carga durante solicitudes o procesos en aplicaciones web. Ideal para mostrar un spinner o indicador de carga al hacer una solicitud a una API REST, enviar un formulario, navegar entre páginas o secciones de un menú, y otros casos similares. Compatible con varios frameworks como React, Vue, Angular, Svelte, Next, JavaScript y más.
 
-## Demo
+## Resultado Final
 
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/Loading-Request-formulario.gif)
 
@@ -96,6 +96,10 @@ export default function ApiSimpson() {
   );
 }
 ```
+
+## Resultado en Next.js consumiendo una API REST
+
+![](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/loading-request-con-nextjs.gif)
 
 [Código](https://github.com/urian121/loading-request-con-nextjs)
 
