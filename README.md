@@ -118,13 +118,13 @@ Recibe un objeto de configuración opcional. Si no se proporciona ningún argume
 
 **Ejemplo de uso**:
 
-````jsx
+```jsx
 showLoading({
   message: "Cargando...",
   spinnerColor: "#f3752b",
   textLoadingColor: "#EE5E09",
 });
-
+```
 
 #### hideLoading(opciones?: HideLoadingOptions)
 
@@ -140,7 +140,7 @@ Si se llama sin argumentos, se utilizará un objeto vacío como valor por defect
 
 ```jsx
 hideLoading({ timeLoading: 1500 });
-````
+```
 
 ### Contribuir
 
