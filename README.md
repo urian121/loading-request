@@ -2,8 +2,9 @@
 
 [![npm version](https://img.shields.io/npm/v/loading-request.svg?style=flat-square)](https://www.npmjs.com/package/loading-request)
 [![GitHub Repo](https://img.shields.io/badge/repository-GitHub-blue?style=flat-square&logo=github)](https://github.com/urian121/loading-request)
+[![npm](https://img.shields.io/npm/dt/loading-request.svg)](https://www.npmjs.com/package/loading-request)
 
-Un paquete para mostrar indicadores de carga durante solicitudes o procesos en aplicaciones web. Ideal para mostrar un spinner o indicador de carga al hacer una solicitud a una API REST, enviar un formulario, navegar entre páginas o secciones de un menú, y otros casos similares. Compatible con varios frameworks como React, Vue, Angular, Svelte, Next, JavaScript y más.
+Loading Request es un paquete npm versátil que muestra indicadores de carga en aplicaciones web. Compatible con frameworks como React, Vue, Angular, Svelte, Next.js, Astro y más, mejora la experiencia del usuario con spinners, barras de progreso y otros indicadores visuales durante solicitudes y procesos asincrónicos en JavaScript. Personalizable y fácil de integrar, Loading Request simplifica la implementación de indicadores de carga en aplicaciones web, mejorando la usabilidad y la percepción de rendimiento.
 
 ## Resultado Final
 
