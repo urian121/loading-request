@@ -38,12 +38,12 @@ const showLoading = (options: ShowLoadingOptions = {}) => {
 /**
  * Oculta el indicador de carga después de un tiempo especificado.
  *
- * @param options Opciones para controlar el tiempo de ocultamiento.
+ * @param options Opciones opcionales para controlar el tiempo de ocultamiento.
  *                - `timeLoading`: Tiempo en milisegundos antes de ocultar el indicador.
  *                  Por defecto es 500ms.
  */
-const hideLoading = ({ timeLoading = 500 }: HideLoadingOptions) => {
-  // La función `hideLoading` utiliza desestructuración directamente en los parámetros, de la función para obtener `timeLoading` de `HideLoadingOptions`.
+const hideLoading = (options: HideLoadingOptions = {}) => {
+  const { timeLoading = 500 } = options;
   const loadingOverlay = document.querySelector(".page-loading.active");
   if (loadingOverlay) {
     setTimeout(() => {
@@ -53,5 +53,5 @@ const hideLoading = ({ timeLoading = 500 }: HideLoadingOptions) => {
   }
 };
 
-// Eportando las funciones para que puedan ser utilizadas en otros archivos
+// Exportando las funciones para que puedan ser utilizadas en otros archivos
 export { showLoading, hideLoading };

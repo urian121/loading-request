@@ -1,6 +1,6 @@
 {
   "name": "loading-request",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
