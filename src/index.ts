@@ -1,18 +1,19 @@
 import "./loading.css"; // Importando el archivo CSS
-import { ShowLoadingOptions, HideLoadingOptions } from "../types/index";
+import { ShowLoadingOptions, HideLoadingOptions } from "../interfaces/index";
 
 /**
  * Muestra un indicador de carga con opciones personalizables.
- * En caso de que no se pase ningún objeto al llamar a la función showLoading, se utilizará un objeto vacío como valor por defecto.
- * @param message Mensaje opcional que se muestra junto al indicador de carga. Por defecto es "Cargando...".
- * @param spinnerColor Color opcional del borde del spinner. Si se proporciona, se aplica dinámicamente.
- * @param textLoadingColor Color opcional del texto del mensaje de carga. Si se proporciona, se aplica dinámicamente.
+ *
+ * @param options Opciones para personalizar el indicador de carga.
+ *                Si no se proporcionan opciones, se utilizarán valores predeterminados.
+ *                - `message`: Mensaje opcional que se muestra junto al indicador de carga. Por defecto es "Cargando...".
+ *                - `spinnerColor`: Color opcional del borde del spinner. Se aplica dinámicamente si se proporciona.
+ *                - `textLoadingColor`: Color opcional del texto del mensaje de carga. Se aplica dinámicamente si se proporciona.
  */
-const showLoading = ({
-  message = "Cargando...",
-  spinnerColor,
-  textLoadingColor,
-}: ShowLoadingOptions = {}) => {
+const showLoading = (options: ShowLoadingOptions = {}) => {
+  // Haciendo uso de destructuración para extraer las opciones y asignar valores predeterminados si no se proporcionan.
+  const { message = "Cargando...", spinnerColor, textLoadingColor } = options;
+
   const loadingOverlay = document.createElement("div");
   loadingOverlay.className = "page-loading active";
 
@@ -36,15 +37,17 @@ const showLoading = ({
 
 /**
  * Oculta el indicador de carga después de un tiempo especificado.
- * @param timeLoading Tiempo en milisegundos antes de ocultar el indicador. Por defecto es 400ms.
+ *
+ * @param options Opciones para controlar el tiempo de ocultamiento.
+ *                - `timeLoading`: Tiempo en milisegundos antes de ocultar el indicador.
+ *                  Por defecto es 500ms.
  */
-const hideLoading = ({ timeLoading = 500 }: HideLoadingOptions = {}) => {
+const hideLoading = ({ timeLoading = 500 }: HideLoadingOptions) => {
+  // La función `hideLoading` utiliza desestructuración directamente en los parámetros, de la función para obtener `timeLoading` de `HideLoadingOptions`.
   const loadingOverlay = document.querySelector(".page-loading.active");
   if (loadingOverlay) {
     setTimeout(() => {
-      if (loadingOverlay && loadingOverlay.parentElement) {
-        loadingOverlay.parentElement.removeChild(loadingOverlay);
-      }
+      loadingOverlay.parentElement?.removeChild(loadingOverlay);
       loadingOverlay.classList.remove("active");
     }, timeLoading);
   }

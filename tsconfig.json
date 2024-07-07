@@ -7,5 +7,5 @@
     "strict": true,
     "esModuleInterop": true
   },
-  "include": ["src", "interface"]
+  "include": ["src/**/*.ts", "interfaces/**/*.ts"]
 }
