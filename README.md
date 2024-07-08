@@ -106,7 +106,7 @@ export default function ApiSimpson() {
 
 ## Ejemplo Práctico en Svelte.js
 
-```jsx
+```svelte
 <script>
   import svelteLogo from "./assets/svelte.svg";
 
@@ -116,26 +116,26 @@ export default function ApiSimpson() {
 
 
   let personas = null;
- async function fetchPersonas() {
+ async function fetchPersonas() {s
 
-  showLoading({
-      message: "Cargando Solicitud...",
-      spinnerColor: "#f3752b",
-      textLoadingColor: "#EE5E09",
-    });
+      showLoading({
+          message: "Cargando Solicitud...",
+          spinnerColor: "#f3752b",
+          textLoadingColor: "#EE5E09",
+      });
 
-    try {
-      const URL = "https://reqres.in/api/users?page=1";
-      const response = await fetch(URL);
-      if (!response.ok) {
-        throw new Error('Error en la solicitud');
+      try {
+        const URL = "https://reqres.in/api/users?page=1";
+        const response = await fetch(URL);
+        if (!response.ok) {
+          throw new Error('Error en la solicitud');
+        }
+        personas = await response.json();
+      } catch (err) {
+        console.log('Error al cargar la API:', err.message);
+      } finally {
+        hideLoading();
       }
-      personas = await response.json();
-    } catch (err) {
-      console.log('Error al cargar la API:', err.message);
-    } finally {
-      hideLoading();
-    }
   }
 </script>
 
@@ -173,7 +173,7 @@ export default function ApiSimpson() {
 
 ## Ejemplo Práctico en Vue.js
 
-```jsx
+```vue
 <script setup>
 import { showLoading, hideLoading } from "loading-request";
 import "loading-request/dist/index.css";
