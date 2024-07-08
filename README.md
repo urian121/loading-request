@@ -104,6 +104,98 @@ export default function ApiSimpson() {
 
 👉 [Código](https://github.com/urian121/loading-request-con-nextjs)
 
+## Ejemplo Práctico en Svelte.js
+
+```jsx
+<script>
+  import svelteLogo from "./assets/svelte.svg";
+
+  // Importando el paquete loading-request
+  import { showLoading, hideLoading } from "loading-request";
+  import "loading-request/dist/index.css";
+
+
+  let personas = null;
+ async function fetchPersonas() {
+
+  showLoading({
+      message: "Cargando Solicitud...",
+      spinnerColor: "#f3752b",
+      textLoadingColor: "#EE5E09",
+    });
+
+    try {
+      const URL = "https://reqres.in/api/users?page=1";
+      const response = await fetch(URL);
+      if (!response.ok) {
+        throw new Error('Error en la solicitud');
+      }
+      personas = await response.json();
+    } catch (err) {
+      console.log('Error al cargar la API:', err.message);
+    } finally {
+      hideLoading();
+    }
+  }
+</script>
+
+<main>
+  <h1>
+      <button on:click={fetchPersonas}> Cargar API</button>
+    <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
+  </h1>
+
+ {#if personas}
+    <ul class="user-list">
+      {#each personas.data as persona (persona.id)}
+        <li class="user-item">
+          <img
+            src={persona.avatar}
+            alt={persona.first_name}
+            class="user-avatar"
+          />
+          <div class="user-details">
+            <p class="user-details__name">
+              Nombre: {persona.first_name}
+            </p>
+            <p class="user-details__email">Email: {persona.email}</p>
+          </div>
+        </li>
+      {/each}
+    </ul>
+  {/if}
+</main>
+```
+
+![](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/loading-request-con-svelte.gif)
+
+👉 [Código](https://github.com/urian121/loading-request-con-svelte)
+
+## Ejemplo Práctico en Vue.js
+
+```jsx
+<script setup>
+import { showLoading, hideLoading } from "loading-request";
+import "loading-request/dist/index.css";
+
+const handleShowLoading = () => {
+  showLoading({
+    message: "Cargando App...",
+    spinnerColor: "#f3752b",
+    textLoadingColor: "#EE5E09",
+  });
+
+  hideLoading({ timeLoading: 1000 });
+};
+</script>
+
+<template>
+  <div id="app">
+    <button @click="handleShowLoading">Mostrar Loading</button>
+  </div>
+</template>
+```
+
 ## API
 
 #### showLoading(opciones?: ShowLoadingOptions)
