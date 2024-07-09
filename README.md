@@ -4,13 +4,15 @@
 [![GitHub Repo](https://img.shields.io/badge/repository-GitHub-blue?style=flat-square&logo=github)](https://github.com/urian121/loading-request)
 [![npm](https://img.shields.io/npm/dt/loading-request.svg)](https://www.npmjs.com/package/loading-request)
 
-Loading Request es un paquete npm versátil que muestra indicadores de carga en aplicaciones web. Compatible con frameworks como React, Vue, Angular, Svelte, Next.js, Astro y más, mejora la experiencia del usuario con spinners, barras de progreso y otros indicadores visuales durante solicitudes y procesos asincrónicos en JavaScript. Personalizable y fácil de integrar, Loading Request simplifica la implementación de indicadores de carga en aplicaciones web, mejorando la usabilidad y la percepción de rendimiento.
+Loading Request es un paquete npm versátil, que nace con el fin de resolver una necesidad muy común en los desarrolladores. Loading Request muestra indicadores de carga en aplicaciones web. Compatible con frameworks como React, Vue, Angular, Svelte, Next.js, Astro y más, mejora la experiencia del usuario con spinners, barras de progreso y otros indicadores visuales durante solicitudes y procesos asincrónicos en JavaScript. Personalizable y fácil de integrar, Loading Request simplifica la implementación de indicadores de carga en aplicaciones web, mejorando la usabilidad y la percepción de rendimiento.
 
-## Ejemplos de uso
+### Casos de uso:
+
+## Pocesar el envio de un formulario
 
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/Loading-Request-formulario.gif)
 
-## Filtrado dinamico en Next.js con el paquete loading-request
+## Filtrado dinámico en Next.js haciendo uso del paquete Loading Request
 
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/filtrado-dinamico-con-checkbox-en-Nextjs-y-usando-el-paquete-loading-request.gif)
 👉 [Código](https://github.com/urian121/filtrado-dinamico-con-checkbox-en-nextjs-y-loading-request)
