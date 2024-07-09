@@ -105,7 +105,7 @@ export default function ApiSimpson() {
 }
 ```
 
-## Resultado en Next.js consumiendo una API REST
+## Mostrando Resultados de una API REST en Next.js
 
 ![](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/loading-request-con-nextjs.gif)
 
@@ -173,6 +173,8 @@ export default function ApiSimpson() {
   {/if}
 </main>
 ```
+
+## Mostrando Resultado final
 
 ![](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/loading-request-con-svelte.gif)
 
