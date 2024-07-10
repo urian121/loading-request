@@ -24,17 +24,18 @@ Loading Request es un paquete npm versátil, que nace con el fin de resolver una
 
 ## Uso a través de CDN
 
-También puedes incluir loading-request directamente en tu proyecto utilizando un enlace CDN. Agrega los siguientes scripts a tu HTML
+También puedes incluir `loading-request` directamente en tu proyecto utilizando un enlace CDN. Sigue estos pasos:
 
-```jsx
+```html
 <!-- Incluye el CSS -->
-<link rel="stylesheet" href="https://unpkg.com/loading-request/dist/index.css">
+<link rel="stylesheet" href="https://unpkg.com/loading-request/dist/index.css" />
 
 <!-- Incluye el JavaScript -->
 <script src="https://unpkg.com/loading-request/dist/index.js"></script>
 ```
 
-Una vez incluido, podrás utilizar **showLoading** y **hideLoading** en tu código JavaScript o TypeScript como se muestra en los ejemplos de uso.
+Una vez incluido, podrás utilizar **showLoading** y **hideLoading** en tu código JavaScript o
+TypeScript como se muestra en los ejemplos de uso.
 
 ```jsx
 <!DOCTYPE html>
@@ -44,13 +45,13 @@ Una vez incluido, podrás utilizar **showLoading** y **hideLoading** en tu códi
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mostrar Loading - Loading Request</title>
     <!-- Incluir el CSS de loading-request desde CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/loading-request/dist/index.css" />
+    <link rel="stylesheet" href="https://unpkg.com/loading-request/dist/index.css" />
   </head>
   <body>
     <button id="showLoadingBtn">Mostrar Loading</button>
 
     <!-- Incluir el JavaScript de loading-request desde CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/loading-request/dist/index.js"></script>
+    <script src="https://unpkg.com/loading-request/dist/index.js"></script>
     <script>
       // Función para mostrar el loading
       function handleShowLoading() {
