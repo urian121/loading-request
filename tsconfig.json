@@ -3,7 +3,7 @@
     "target": "es5",
     "module": "esnext",
     "declaration": true,
-    "emitDeclarationOnly": true,
+    // "emitDeclarationOnly": true, //Aqui
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true

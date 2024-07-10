@@ -1,14 +1,20 @@
 {
   "name": "loading-request",
   "version": "1.5.2",
-  "type": "module",
+  "description": "Loading Request es un paquete versátil para mostrar indicadores de carga en aplicaciones web. Compatible con múltiples frameworks como React, Vue, Angular, Svelte, Next.js, Astro y más. Mejora la experiencia del usuario mostrando spinners, barras de progreso y otros indicadores visuales durante solicitudes y procesos asincrónicos en JavaScript.",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
     "start": "rollup -c -w",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "publish": "npm run build && npm publish --access public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/urian121/loading-request"
   },
   "keywords": [
     "loading",
@@ -88,7 +94,15 @@
   ],
   "author": "Urian Viera",
   "license": "ISC",
-  "description": "Loading Request es un paquete versátil para mostrar indicadores de carga en aplicaciones web. Compatible con múltiples frameworks como React, Vue, Angular, Svelte, Next.js, Astro y más. Mejora la experiencia del usuario mostrando spinners, barras de progreso y otros indicadores visuales durante solicitudes y procesos asincrónicos en JavaScript.",
+  "bugs": {
+    "url": "<https://github.com/urian121/loading-request/issues>"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist"
+  ],
+  "homepage": "https://github.com/urian121/loading-request#README",
   "devDependencies": {
     "@types/node": "^20.14.9",
     "rollup": "^4.18.0",
