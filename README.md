@@ -34,7 +34,7 @@ También puedes incluir loading-request directamente en tu proyecto utilizando u
 <script src="https://unpkg.com/loading-request/dist/index.js"></script>
 ```
 
-Una vez incluido, podrás utilizar showLoading y hideLoading en tu código JavaScript o TypeScript como se muestra en los ejemplos de uso.
+Una vez incluido, podrás utilizar **showLoading** y **hideLoading** en tu código JavaScript o TypeScript como se muestra en los ejemplos de uso.
 
 ```jsx
 <!DOCTYPE html>
@@ -42,23 +42,20 @@ Una vez incluido, podrás utilizar showLoading y hideLoading en tu código JavaS
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mostrar Loading</title>
+    <title>Mostrar Loading - Loading Request</title>
     <!-- Incluir el CSS de loading-request desde CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/loading-request/dist/index.css" />
-    <style>
-      /* Estilos adicionales si es necesario */
-    </style>
   </head>
   <body>
     <button id="showLoadingBtn">Mostrar Loading</button>
 
     <!-- Incluir el JavaScript de loading-request desde CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/loading-request/dist/index.cjs.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/loading-request/dist/index.js"></script>
     <script>
       // Función para mostrar el loading
       function handleShowLoading() {
         showLoading({
-          message: "Cargando app...",
+          message: "Cargando App...",
           spinnerColor: "#f3752b",
           textLoadingColor: "#EE5E09",
         });
