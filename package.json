@@ -105,7 +105,8 @@
   "homepage": "https://github.com/urian121/loading-request#README",
   "devDependencies": {
     "@types/node": "^20.14.9",
-    "rollup": "^4.18.0",
+    "postcss": "^8.4.39",
+    "rollup": "^4.18.1",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.36.0",
     "typescript": "^5.5.3"

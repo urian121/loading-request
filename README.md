@@ -22,6 +22,57 @@ Loading Request es un paquete npm versátil, que nace con el fin de resolver una
     $ npm install loading-request --save
     $ yarn add loading-request
 
+## Uso a través de CDN
+
+También puedes incluir loading-request directamente en tu proyecto utilizando un enlace CDN. Agrega los siguientes scripts a tu HTML
+
+```jsx
+<!-- Incluye el CSS -->
+<link rel="stylesheet" href="https://unpkg.com/loading-request/dist/index.css">
+
+<!-- Incluye el JavaScript -->
+<script src="https://unpkg.com/loading-request/dist/index.js"></script>
+```
+
+Una vez incluido, podrás utilizar showLoading y hideLoading en tu código JavaScript o TypeScript como se muestra en los ejemplos de uso.
+
+```jsx
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mostrar Loading</title>
+    <!-- Incluir el CSS de loading-request desde CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/loading-request/dist/index.css" />
+    <style>
+      /* Estilos adicionales si es necesario */
+    </style>
+  </head>
+  <body>
+    <button id="showLoadingBtn">Mostrar Loading</button>
+
+    <!-- Incluir el JavaScript de loading-request desde CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/loading-request/dist/index.cjs.js"></script>
+    <script>
+      // Función para mostrar el loading
+      function handleShowLoading() {
+        showLoading({
+          message: "Cargando app...",
+          spinnerColor: "#f3752b",
+          textLoadingColor: "#EE5E09",
+        });
+
+        hideLoading();
+      }
+
+      // Asociar la función al botón
+      document.querySelector("#showLoadingBtn").addEventListener("click", handleShowLoading);
+    </script>
+  </body>
+</html>
+```
+
 ## Caracteristicas
 
 - Fácil de usar: Implementa indicadores de carga fácilmente en tu aplicación web con solo unas pocas líneas de código.
