@@ -2,10 +2,10 @@
   "name": "loading-request",
   "version": "1.5.2",
   "description": "Loading Request es un paquete versátil para mostrar indicadores de carga en aplicaciones web. Compatible con múltiples frameworks como React, Vue, Angular, Svelte, Next.js, Astro y más. Mejora la experiencia del usuario mostrando spinners, barras de progreso y otros indicadores visuales durante solicitudes y procesos asincrónicos en JavaScript.",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
   "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.js",
   "scripts": {
     "start": "rollup -c -w",
     "test": "echo \"Error: no test specified\" && exit 1",

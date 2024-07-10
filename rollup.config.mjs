@@ -12,6 +12,7 @@ export default {
   plugins: [
     typescript({
       tsconfig: "./tsconfig.json",
+      useTsconfigDeclarationDir: true,
     }),
     postcss({
       extract: "index.css",

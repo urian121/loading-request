@@ -3,10 +3,12 @@
     "target": "es5",
     "module": "esnext",
     "declaration": true,
-    // "emitDeclarationOnly": true, //Aqui
+    "declarationDir": "./dist",
     "outDir": "./dist",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src/**/*.ts", "interfaces/**/*.ts"]
 }
