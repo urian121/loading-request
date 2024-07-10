@@ -5,11 +5,7 @@ export default {
   input: "src/index.ts",
   output: [
     {
-      file: "dist/index.cjs.js",
-      format: "cjs",
-    },
-    {
-      file: "dist/index.esm.js",
+      file: "dist/index.js",
       format: "es",
     },
   ],
@@ -19,12 +15,12 @@ export default {
     }),
     postcss({
       extract: "index.css",
-      minimize: true, // Minimize CSS
-      modules: false, // No necesitas módulos CSS para un archivo CSS global
-      use: ["sass"], // Cambiado de "css" a "sass" para mayor flexibilidad
-      extensions: [".css", ".scss"], // Extensiones de archivo soportadas
+      minimize: true,
+      modules: false,
+      use: ["sass"],
+      extensions: [".css", ".scss"],
       inject: {
-        insertAt: "top", // Opcional: dónde insertar el CSS en el documento
+        insertAt: "top",
       },
     }),
   ],
