@@ -37,7 +37,7 @@ También puedes incluir `loading-request` directamente en tu proyecto utilizando
 Una vez incluido, podrás utilizar **showLoading** y **hideLoading** en tu código JavaScript o
 TypeScript como se muestra en los ejemplos de uso.
 
-```jsx
+```html
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -48,11 +48,12 @@ TypeScript como se muestra en los ejemplos de uso.
     <link rel="stylesheet" href="https://unpkg.com/loading-request/dist/index.css" />
   </head>
   <body>
-    <button id="showLoadingBtn">Mostrar Loading</button>
+    <button id="btnLoading">Mostrar Loading</button>
 
-    <!-- Incluir el JavaScript de loading-request desde CDN -->
-    <script src="https://unpkg.com/loading-request/dist/index.js"></script>
-    <script>
+    <!-- Incluir el JavaScript de loading-request desde CDN como módulo -->
+    <script type="module">
+      import { showLoading, hideLoading } from "https://unpkg.com/loading-request/dist/index.js";
+
       // Función para mostrar el loading
       function handleShowLoading() {
         showLoading({
@@ -65,7 +66,7 @@ TypeScript como se muestra en los ejemplos de uso.
       }
 
       // Asociar la función al botón
-      document.querySelector("#showLoadingBtn").addEventListener("click", handleShowLoading);
+      document.querySelector("#btnLoading").addEventListener("click", handleShowLoading);
     </script>
   </body>
 </html>
