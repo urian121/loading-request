@@ -9,10 +9,11 @@ import { ShowLoadingOptions, HideLoadingOptions } from "../interfaces/index";
  *                - `message`: Mensaje opcional que se muestra junto al indicador de carga. Por defecto es "Cargando...".
  *                - `spinnerColor`: Color opcional del borde del spinner. Se aplica dinámicamente si se proporciona.
  *                - `textLoadingColor`: Color opcional del texto del mensaje de carga. Se aplica dinámicamente si se proporciona.
+ *                - `textLoadingSize`: Tamaño opcional del texto del mensaje de carga. Se aplica dinámicamente si se proporciona.
  */
 const showLoading = (options: ShowLoadingOptions = {}) => {
   // Haciendo uso de destructuración para extraer las opciones y asignar valores predeterminados si no se proporcionan.
-  const { message = "Cargando...", spinnerColor, textLoadingColor } = options;
+  const { message = "Cargando...", spinnerColor, textLoadingColor, textLoadingSize } = options;
 
   const loadingOverlay = document.createElement("div");
   loadingOverlay.className = "page-loading active";
@@ -22,13 +23,16 @@ const showLoading = (options: ShowLoadingOptions = {}) => {
     ? `style="border: 0.15em solid ${spinnerColor}; border-right-color: transparent;"`
     : "";
 
-  // Definir el color del texto dinámicamente o usar el valor por defecto del CSS
-  const textLoadingStyle = textLoadingColor ? `style="color: ${textLoadingColor} !important;"` : "";
+  // Definir el color y tamaño del texto dinámicamente o usar el valor por defecto del CSS
+  const textLoadingStyle = `
+    ${textLoadingColor ? `color: ${textLoadingColor} !important;` : ""}
+    ${textLoadingSize ? `font-size: ${textLoadingSize} !important;` : ""}
+  `;
 
   loadingOverlay.innerHTML = `
     <div class="page-loading-inner">
       <div class="page-spinner" ${spinnerStyle}></div>
-      <span ${textLoadingStyle}>${message}</span>
+      <span style="${textLoadingStyle}">${message}</span>
     </div>
   `;
 

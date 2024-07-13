@@ -43,7 +43,7 @@ TypeScript como se muestra en los ejemplos de uso.
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mostrar Loading - Loading Request</title>
+    <title>Loading Request</title>
     <!-- Incluir el CSS de loading-request desde CDN -->
     <link rel="stylesheet" href="https://unpkg.com/loading-request/dist/index.css" />
   </head>
@@ -60,6 +60,7 @@ TypeScript como se muestra en los ejemplos de uso.
           message: "Cargando App...",
           spinnerColor: "#f3752b",
           textLoadingColor: "#EE5E09",
+          textLoadingSize: "16px",
         });
 
         hideLoading();
@@ -97,6 +98,7 @@ const App = () => {
       message: "Cargando...",
       spinnerColor: "#f3752b",
       textLoadingColor: "#EE5E09",
+      textLoadingSize: "20px",
     });
 
     hideLoading({ timeLoading: 1500 });
@@ -179,6 +181,7 @@ export default function ApiSimpson() {
           message: "Cargando Solicitud...",
           spinnerColor: "#f3752b",
           textLoadingColor: "#EE5E09",
+          textLoadingSize: "18px",
       });
 
       try {
@@ -242,6 +245,7 @@ const handleShowLoading = () => {
     message: "Cargando App...",
     spinnerColor: "#f3752b",
     textLoadingColor: "#EE5E09",
+    textLoadingSize: "20px",
   });
 
   hideLoading({ timeLoading: 1000 });
@@ -265,6 +269,7 @@ Es una función que permite mostrar un indicador de carga con opciones personali
   - message: Mensaje que se muestra junto al indicador de carga. Por defecto es "Cargando...".
   - spinnerColor: Color opcional del borde del spinner. Si se proporciona, se aplica dinámicamente.
   - textLoadingColor: Color opcional del texto del mensaje de carga. Si se proporciona, se aplica dinámicamente.
+  - textLoadingSize: Tamaño opcional del texto del mensaje de carga. Se aplica dinámicamente si se proporciona.
 
 Recibe un objeto de configuración opcional. Si no se proporciona ningún argumento, se utilizará un objeto vacío como valor por defecto.
 
@@ -275,6 +280,7 @@ showLoading({
   message: "Cargando...",
   spinnerColor: "#f3752b",
   textLoadingColor: "#EE5E09",
+  textLoadingSize: "18px",
 });
 ```
 

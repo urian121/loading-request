@@ -3,6 +3,7 @@ export interface ShowLoadingOptions {
   message?: string;
   spinnerColor?: string;
   textLoadingColor?: string;
+  textLoadingSize?: string;
 }
 
 // Definición de la interfaz para las opciones de ocultar el loading

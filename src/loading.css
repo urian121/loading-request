@@ -12,9 +12,6 @@
   visibility: hidden;
   z-index: 9999;
 }
-.dark-mode .page-loading {
-  background-color: #0b0f19;
-}
 .page-loading.active {
   opacity: 0.8;
   visibility: visible;
@@ -36,18 +33,14 @@
 }
 .page-loading-inner > span {
   display: block;
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: bold;
   color: #7366ff;
 }
-.dark-mode .page-loading-inner > span {
-  color: #fff;
-  opacity: 0.6;
-}
 .page-spinner {
   display: inline-block;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 3rem;
+  height: 3rem;
   margin-bottom: 0.75rem;
   vertical-align: text-bottom;
   border: 0.15em solid #7366ff;
@@ -55,10 +48,6 @@
   border-radius: 50%;
   -webkit-animation: spinner 0.75s linear infinite;
   animation: spinner 0.75s linear infinite;
-}
-.dark-mode .page-spinner {
-  border-color: #7366ff;
-  border-right-color: transparent;
 }
 @-webkit-keyframes spinner {
   100% {
