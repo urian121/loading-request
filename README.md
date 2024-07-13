@@ -4,18 +4,18 @@
 [![GitHub Repo](https://img.shields.io/badge/repository-GitHub-blue?style=flat-square&logo=github)](https://github.com/urian121/loading-request)
 [![npm](https://img.shields.io/npm/dt/loading-request.svg)](https://www.npmjs.com/package/loading-request)
 
-Loading Request es un paquete npm versátil, que nace con el fin de resolver una necesidad muy común en los desarrolladores. Loading Request muestra indicadores de carga en aplicaciones web. Compatible con frameworks como React, Vue, Angular, Svelte, Next.js, Astro y más, mejora la experiencia del usuario con spinners, barras de progreso y otros indicadores visuales durante solicitudes y procesos asincrónicos en JavaScript. Personalizable y fácil de integrar, Loading Request simplifica la implementación de indicadores de carga en aplicaciones web, mejorando la usabilidad y la percepción de rendimiento.
+**Loading Request** es un paquete npm versátil diseñado para abordar una necesidad común entre los desarrolladores: mostrar indicadores de carga en aplicaciones web. Compatible con frameworks populares como React, Vue, Angular, Svelte, Next.js, Astro y más, este paquete mejora la experiencia del usuario al proporcionar spinners, barras de progreso y otros indicadores visuales durante solicitudes y procesos asincrónicos en JavaScript. Es altamente personalizable y fácil de integrar, simplificando significativamente la implementación de indicadores de carga en aplicaciones web. Esto no solo mejora la usabilidad, sino también la percepción de rendimiento por parte de los usuarios.
 
 ## Casos de uso:
 
-### Procesar el envio de un formulario
+### Implementar Loading Request en el envío de un formulario
 
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/Loading-Request-formulario.gif)
 
-### Filtrado dinámico en Next.js haciendo uso del paquete Loading Request
+### Implementación de Filtrado Dinámico en Next.js con Loading Request
 
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/filtrado-dinamico-con-checkbox-en-Nextjs-y-usando-el-paquete-loading-request.gif)
-👉 [Código](https://github.com/urian121/filtrado-dinamico-con-checkbox-en-nextjs-y-loading-request)
+👉 [Ver Código en GitHub](https://github.com/urian121/filtrado-dinamico-con-checkbox-en-nextjs-y-loading-request)
 
 ## Instalación
 
@@ -86,7 +86,7 @@ TypeScript como se muestra en los ejemplos de uso.
 - Actualizaciones regulares: Mantenido activamente con mejoras y actualizaciones periódicas.
 - Licencia abierta: Publicado bajo licencia ISC, permitiendo su uso en proyectos comerciales y personales sin restricciones.
 
-## Ejemplo Práctico en React.js
+## Ejemplo Práctico utilizando React.js
 
 ```jsx
 import { showLoading, hideLoading } from "loading-request";
@@ -110,7 +110,7 @@ const App = () => {
 export default App;
 ```
 
-## Ejemplo Práctico en Next.js
+## Ejemplo Práctico utilizando Next.js
 
 ```jsx
 "use client";
@@ -161,18 +161,16 @@ export default function ApiSimpson() {
 
 ![](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/loading-request-con-nextjs.gif)
 
-👉 [Código](https://github.com/urian121/loading-request-con-nextjs)
+👉 [Ver Código en GitHub](https://github.com/urian121/loading-request-con-nextjs)
 
-## Ejemplo Práctico en Svelte.js
+## Ejemplo Práctico utilizando Svelte.js
 
 ```svelte
 <script>
   import svelteLogo from "./assets/svelte.svg";
 
-  // Importando el paquete loading-request
   import { showLoading, hideLoading } from "loading-request";
   import "loading-request/dist/index.css";
-
 
   let personas = null;
  async function fetchPersonas() {s
@@ -201,7 +199,7 @@ export default function ApiSimpson() {
 
 <main>
   <h1>
-      <button on:click={fetchPersonas}> Cargar API</button>
+    <button on:click={fetchPersonas}> Cargar API</button>
     <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
   </h1>
 
@@ -227,11 +225,11 @@ export default function ApiSimpson() {
 </main>
 ```
 
-## Mostrando Resultado final
+## Resultado Completo del Ejemplo Práctico con Svelte
 
 ![](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/loading-request-con-svelte.gif)
 
-👉 [Código](https://github.com/urian121/loading-request-con-svelte)
+👉 [Ver Código en GitHub](https://github.com/urian121/loading-request-con-svelte)
 
 ## Ejemplo Práctico en Vue.js
 
@@ -269,7 +267,7 @@ Es una función que permite mostrar un indicador de carga con opciones personali
   - message: Mensaje que se muestra junto al indicador de carga. Por defecto es "Cargando...".
   - spinnerColor: Color opcional del borde del spinner. Si se proporciona, se aplica dinámicamente.
   - textLoadingColor: Color opcional del texto del mensaje de carga. Si se proporciona, se aplica dinámicamente.
-  - textLoadingSize: Tamaño opcional del texto del mensaje de carga. Se aplica dinámicamente si se proporciona.
+  - textLoadingSize: Tamaño opcional del texto del mensaje de carga. Se aplica dinámicamente si se proporciona por default "16px".
 
 Recibe un objeto de configuración opcional. Si no se proporciona ningún argumento, se utilizará un objeto vacío como valor por defecto.
 
@@ -300,7 +298,7 @@ Si se llama sin argumentos, se utilizará un objeto vacío como valor por defect
 hideLoading({ timeLoading: 1500 });
 ```
 
-### Contribuir
+### Únete y Contribuye
 
 Si encuentras algún problema o tienes una idea para mejorar el paquete, por favor abre un issue o envía un pull request en GitHub: https://github.com/urian121/loading-request
 
@@ -318,10 +316,10 @@ Si encuentras algún problema o tienes una idea para mejorar el paquete, por fav
 
 ## License
 
-Licensed under MIT
+Licensed under ISC
 
 [![GitHub](https://img.shields.io/badge/GitHub-urian121/loading--request-181717?logo=github&style=flat-square)](https://github.com/urian121/loading-request)
 
 ## Agradecimientos
 
-¡Gracias a todos los Devs 👨‍💻 que han utilizado y contribuido al desarrollo de **Loading Request**! Su apoyo y retroalimentación son fundamentales para mejorar continuamente este paquete.
+¡Gracias a todos los **Devs** 👨‍💻 que han utilizado y contribuido al desarrollo de **Loading Request**! Su apoyo y retroalimentación son fundamentales para mejorar continuamente este paquete.
