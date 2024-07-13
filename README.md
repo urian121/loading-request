@@ -10,9 +10,13 @@
 
 ### Implementar Loading Request en el envío de un formulario
 
+<hr>
+
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/Loading-Request-formulario.gif)
 
 ### Implementación de Filtrado Dinámico en Next.js con Loading Request
+
+<hr>
 
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/filtrado-dinamico-con-checkbox-en-Nextjs-y-usando-el-paquete-loading-request.gif)
 👉 [Ver Código en GitHub](https://github.com/urian121/filtrado-dinamico-con-checkbox-en-nextjs-y-loading-request)
@@ -21,70 +25,6 @@
 
     $ npm install loading-request --save
     $ yarn add loading-request
-
-## Uso a través de CDN
-
-También puedes incluir `loading-request` directamente en tu proyecto utilizando un enlace CDN. Sigue estos pasos:
-
-```html
-<!-- Incluye el CSS -->
-<link rel="stylesheet" href="https://unpkg.com/loading-request/dist/index.css" />
-
-<!-- Incluye el JavaScript -->
-<script src="https://unpkg.com/loading-request/dist/index.js"></script>
-```
-
-Una vez incluido, podrás utilizar **showLoading** y **hideLoading** en tu código JavaScript o
-TypeScript como se muestra en los ejemplos de uso.
-
-```html
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Loading Request</title>
-    <!-- Incluir el CSS de loading-request desde CDN -->
-    <link rel="stylesheet" href="https://unpkg.com/loading-request/dist/index.css" />
-  </head>
-  <body>
-    <button id="btnLoading">Mostrar Loading</button>
-
-    <!-- Incluir el JavaScript de loading-request desde CDN como módulo -->
-    <script type="module">
-      import { showLoading, hideLoading } from "https://unpkg.com/loading-request/dist/index.js";
-
-      // Función para mostrar el loading
-      function handleShowLoading() {
-        showLoading({
-          message: "Cargando App...",
-          spinnerColor: "#f3752b",
-          textLoadingColor: "#EE5E09",
-          textLoadingSize: "16px",
-        });
-
-        hideLoading();
-      }
-
-      // Asociar la función al botón
-      document.querySelector("#btnLoading").addEventListener("click", handleShowLoading);
-    </script>
-  </body>
-</html>
-```
-
-## Caracteristicas
-
-- Fácil de usar: Implementa indicadores de carga fácilmente en tu aplicación web con solo unas pocas líneas de código.
-- Compatible con múltiples frameworks: Funciona sin problemas con frameworks populares como React, Vue, Angular, y Svelte.
-- Personalización flexible: Permite personalizar el color del spinner y del texto del mensaje de carga según las necesidades del usuario.
-- Integración rápida: Instalación simple a través de npm o yarn, listo para usar en minutos.
-- Funcionalidad asincrónica: Soporta operaciones asíncronas como carga de datos, envío de formularios, y navegación entre páginas.
-- Animaciones suaves: Utiliza animaciones CSS para proporcionar una experiencia de usuario fluida.
-- Ligero y eficiente: Diseñado para tener un impacto mínimo en el rendimiento de la aplicación.
-- Documentación clara y detallada: Incluye ejemplos prácticos y documentación completa para facilitar la implementación y configuración.
-- Actualizaciones regulares: Mantenido activamente con mejoras y actualizaciones periódicas.
-- Licencia abierta: Publicado bajo licencia ISC, permitiendo su uso en proyectos comerciales y personales sin restricciones.
 
 ## Ejemplo Práctico utilizando React.js
 
@@ -256,6 +196,70 @@ const handleShowLoading = () => {
   </div>
 </template>
 ```
+
+## Uso a través de CDN
+
+También puedes incluir `loading-request` directamente en tu proyecto utilizando un enlace CDN. Sigue estos pasos:
+
+```html
+<!-- Incluye el CSS -->
+<link rel="stylesheet" href="https://unpkg.com/loading-request/dist/index.css" />
+
+<!-- Incluye el JavaScript -->
+<script src="https://unpkg.com/loading-request/dist/index.js"></script>
+```
+
+Una vez incluido, podrás utilizar **showLoading** y **hideLoading** en tu código JavaScript o
+TypeScript como se muestra en los ejemplos de uso.
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading Request</title>
+    <!-- Incluir el CSS de loading-request desde CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/loading-request/dist/index.css" />
+  </head>
+  <body>
+    <button id="btnLoading">Mostrar Loading</button>
+
+    <!-- Incluir el JavaScript de loading-request desde CDN como módulo -->
+    <script type="module">
+      import { showLoading, hideLoading } from "https://unpkg.com/loading-request/dist/index.js";
+
+      // Función para mostrar el loading
+      function handleShowLoading() {
+        showLoading({
+          message: "Cargando App...",
+          spinnerColor: "#f3752b",
+          textLoadingColor: "#EE5E09",
+          textLoadingSize: "16px",
+        });
+
+        hideLoading();
+      }
+
+      // Asociar la función al botón
+      document.querySelector("#btnLoading").addEventListener("click", handleShowLoading);
+    </script>
+  </body>
+</html>
+```
+
+## Caracteristicas
+
+- Fácil de usar: Implementa indicadores de carga fácilmente en tu aplicación web con solo unas pocas líneas de código.
+- Compatible con múltiples frameworks: Funciona sin problemas con frameworks populares como React, Vue, Angular, y Svelte.
+- Personalización flexible: Permite personalizar el color del spinner y del texto del mensaje de carga según las necesidades del usuario.
+- Integración rápida: Instalación simple a través de npm o yarn, listo para usar en minutos.
+- Funcionalidad asincrónica: Soporta operaciones asíncronas como carga de datos, envío de formularios, y navegación entre páginas.
+- Animaciones suaves: Utiliza animaciones CSS para proporcionar una experiencia de usuario fluida.
+- Ligero y eficiente: Diseñado para tener un impacto mínimo en el rendimiento de la aplicación.
+- Documentación clara y detallada: Incluye ejemplos prácticos y documentación completa para facilitar la implementación y configuración.
+- Actualizaciones regulares: Mantenido activamente con mejoras y actualizaciones periódicas.
+- Licencia abierta: Publicado bajo licencia ISC, permitiendo su uso en proyectos comerciales y personales sin restricciones.
 
 ## API
 
