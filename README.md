@@ -10,13 +10,9 @@
 
 ### Implementar Loading Request en el envío de un formulario
 
-<hr>
-
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/Loading-Request-formulario.gif)
 
 ### Implementación de Filtrado Dinámico en Next.js con Loading Request
-
-<hr>
 
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/filtrado-dinamico-con-checkbox-en-Nextjs-y-usando-el-paquete-loading-request.gif)
 👉 [Ver Código en GitHub](https://github.com/urian121/filtrado-dinamico-con-checkbox-en-nextjs-y-loading-request)
