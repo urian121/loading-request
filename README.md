@@ -3,14 +3,13 @@
 [![npm version](https://img.shields.io/npm/v/loading-request.svg?style=flat-square)](https://www.npmjs.com/package/loading-request)
 [![GitHub Repo](https://img.shields.io/badge/repository-GitHub-blue?style=flat-square&logo=github)](https://github.com/urian121/loading-request)
 [![npm](https://img.shields.io/npm/dt/loading-request.svg)](https://www.npmjs.com/package/loading-request)
-
-**Loading Request** es un paquete npm versátil diseñado para abordar una necesidad común entre los desarrolladores: mostrar indicadores de carga en aplicaciones web. Compatible con frameworks populares como React, Vue, Angular, Svelte, Next.js, Astro y más, este paquete mejora la experiencia del usuario al proporcionar spinners, barras de progreso y otros indicadores visuales durante solicitudes y procesos asincrónicos en JavaScript. Es altamente personalizable y fácil de integrar, simplificando significativamente la implementación de indicadores de carga en aplicaciones web. Esto no solo mejora la usabilidad, sino también la percepción de rendimiento por parte de los usuarios.
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 **Loading Request** es un paquete npm versátil, diseñado para mejorar la experiencia del usuario mostrando indicadores de carga durante solicitudes y procesos asincrónicos en aplicaciones web. Compatible con frameworks populares como React, Vue, Angular, Svelte, Next.js, y Astro, este paquete simplifica la implementación de spinners, barras de progreso y otros indicadores visuales.
 
 ## ¿Para qué fue creado?
 
-Loading Request facilita la incorporación de indicadores de carga en aplicaciones JavaScript, proporcionando una solución rápida y eficiente para mostrar que una solicitud o proceso está en curso.
+**Loading Request** facilita la incorporación de indicadores de carga en aplicaciones JavaScript, proporcionando una solución rápida y eficiente para mostrar que una solicitud o proceso está en curso.
 
 ## ¿Qué necesidad resuelve?
 
@@ -19,7 +18,7 @@ Este paquete responde a la necesidad de mejorar la usabilidad y percepción del 
 ## Ventajas y Características Clave:
 
 - **Fácil de usar:** Implementa indicadores de carga fácilmente en tu aplicación web con solo unas pocas líneas de código.
-- **Compatible con múltiples frameworks:** Funciona sin problemas con React, Vue, Angular, Svelte, y más.
+- **Compatible con múltiples frameworks:** Funciona sin problemas con React, Vue, Angular, Svelte, Next.js, e incluso con JavaScript nativo a través de CDN.
 - **Personalización flexible:** Ajusta colores del spinner y del texto de carga para adaptarse a tu diseño.
 - **Integración rápida:** Instalación simple a través de npm o yarn, listo para usar en minutos.
 - **Funcionalidad asincrónica:** Soporta operaciones asíncronas como carga de datos, envío de formularios, y navegación entre páginas.
@@ -29,7 +28,7 @@ Este paquete responde a la necesidad de mejorar la usabilidad y percepción del 
 - **Actualizaciones regulares:** Mantenido activamente con mejoras y actualizaciones periódicas.
 - **Licencia abierta:** Publicado bajo licencia ISC, permitiendo su uso en proyectos comerciales y personales sin restricciones.
 
-Con Loading Request, puedes ofrecer una experiencia de usuario más fluida y profesional, asegurando que tus aplicaciones web sean visualmente atractivas y funcionales durante la carga de datos.
+Con **Loading Request,** puedes ofrecer una experiencia de usuario más fluida y profesional, asegurando que tus aplicaciones web sean visualmente atractivas y funcionales durante la carga de datos.
 
 ## Casos de uso:
 
