@@ -6,6 +6,31 @@
 
 **Loading Request** es un paquete npm versátil diseñado para abordar una necesidad común entre los desarrolladores: mostrar indicadores de carga en aplicaciones web. Compatible con frameworks populares como React, Vue, Angular, Svelte, Next.js, Astro y más, este paquete mejora la experiencia del usuario al proporcionar spinners, barras de progreso y otros indicadores visuales durante solicitudes y procesos asincrónicos en JavaScript. Es altamente personalizable y fácil de integrar, simplificando significativamente la implementación de indicadores de carga en aplicaciones web. Esto no solo mejora la usabilidad, sino también la percepción de rendimiento por parte de los usuarios.
 
+**Loading Request** es un paquete npm versátil, diseñado para mejorar la experiencia del usuario mostrando indicadores de carga durante solicitudes y procesos asincrónicos en aplicaciones web. Compatible con frameworks populares como React, Vue, Angular, Svelte, Next.js, y Astro, este paquete simplifica la implementación de spinners, barras de progreso y otros indicadores visuales.
+
+## ¿Para qué fue creado?
+
+Loading Request facilita la incorporación de indicadores de carga en aplicaciones JavaScript, proporcionando una solución rápida y eficiente para mostrar que una solicitud o proceso está en curso.
+
+## ¿Qué necesidad resuelve?
+
+Este paquete responde a la necesidad de mejorar la usabilidad y percepción del rendimiento en aplicaciones web al proporcionar una visualización clara y atractiva del estado de carga, evitando la incertidumbre del usuario durante procesos asincrónicos.
+
+## Ventajas y Características Clave:
+
+- **Fácil de usar:** Implementa indicadores de carga fácilmente en tu aplicación web con solo unas pocas líneas de código.
+- **Compatible con múltiples frameworks:** Funciona sin problemas con React, Vue, Angular, Svelte, y más.
+- **Personalización flexible:** Ajusta colores del spinner y del texto de carga para adaptarse a tu diseño.
+- **Integración rápida:** Instalación simple a través de npm o yarn, listo para usar en minutos.
+- **Funcionalidad asincrónica:** Soporta operaciones asíncronas como carga de datos, envío de formularios, y navegación entre páginas.
+- **Animaciones suaves:** Utiliza animaciones CSS para una experiencia de usuario fluida.
+- **Ligero y eficiente:** Minimiza el impacto en el rendimiento de la aplicación.
+- **Documentación clara y detallada:** Incluye ejemplos prácticos y documentación completa para facilitar la implementación y configuración.
+- **Actualizaciones regulares:** Mantenido activamente con mejoras y actualizaciones periódicas.
+- **Licencia abierta:** Publicado bajo licencia ISC, permitiendo su uso en proyectos comerciales y personales sin restricciones.
+
+Con Loading Request, puedes ofrecer una experiencia de usuario más fluida y profesional, asegurando que tus aplicaciones web sean visualmente atractivas y funcionales durante la carga de datos.
+
 ## Casos de uso:
 
 ### Implementar Loading Request en el envío de un formulario
@@ -109,7 +134,7 @@ export default function ApiSimpson() {
   import "loading-request/dist/index.css";
 
   let personas = null;
- async function fetchPersonas() {s
+ async function fetchPersonas() {
 
       showLoading({
           message: "Cargando Solicitud...",
@@ -244,19 +269,6 @@ TypeScript como se muestra en los ejemplos de uso.
 </html>
 ```
 
-## Caracteristicas
-
-- Fácil de usar: Implementa indicadores de carga fácilmente en tu aplicación web con solo unas pocas líneas de código.
-- Compatible con múltiples frameworks: Funciona sin problemas con frameworks populares como React, Vue, Angular, y Svelte.
-- Personalización flexible: Permite personalizar el color del spinner y del texto del mensaje de carga según las necesidades del usuario.
-- Integración rápida: Instalación simple a través de npm o yarn, listo para usar en minutos.
-- Funcionalidad asincrónica: Soporta operaciones asíncronas como carga de datos, envío de formularios, y navegación entre páginas.
-- Animaciones suaves: Utiliza animaciones CSS para proporcionar una experiencia de usuario fluida.
-- Ligero y eficiente: Diseñado para tener un impacto mínimo en el rendimiento de la aplicación.
-- Documentación clara y detallada: Incluye ejemplos prácticos y documentación completa para facilitar la implementación y configuración.
-- Actualizaciones regulares: Mantenido activamente con mejoras y actualizaciones periódicas.
-- Licencia abierta: Publicado bajo licencia ISC, permitiendo su uso en proyectos comerciales y personales sin restricciones.
-
 ## API
 
 #### showLoading(opciones?: ShowLoadingOptions)
@@ -264,10 +276,10 @@ TypeScript como se muestra en los ejemplos de uso.
 Es una función que permite mostrar un indicador de carga con opciones personalizables.
 
 - **Opciones**:
-  - message: Mensaje que se muestra junto al indicador de carga. Por defecto es "Cargando...".
-  - spinnerColor: Color opcional del borde del spinner. Si se proporciona, se aplica dinámicamente.
-  - textLoadingColor: Color opcional del texto del mensaje de carga. Si se proporciona, se aplica dinámicamente.
-  - textLoadingSize: Tamaño opcional del texto del mensaje de carga. Se aplica dinámicamente si se proporciona por default "16px".
+  - **message:** Mensaje que se muestra junto al indicador de carga. Por defecto es "Cargando...".
+  - **spinnerColor:** Color opcional del borde del spinner. Si se proporciona, se aplica dinámicamente.
+  - **textLoadingColor:** Color opcional del texto del mensaje de carga. Si se proporciona, se aplica dinámicamente.
+  - **textLoadingSize:** Tamaño opcional del texto del mensaje de carga. Se aplica dinámicamente si se proporciona por default "16px".
 
 Recibe un objeto de configuración opcional. Si no se proporciona ningún argumento, se utilizará un objeto vacío como valor por defecto.
 
