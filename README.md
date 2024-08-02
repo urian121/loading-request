@@ -35,11 +35,20 @@ Con **Loading Request,** puedes ofrecer una experiencia de usuario más fluida y
 ### Implementar Loading Request en el envío de un formulario
 
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/Loading-Request-formulario.gif)
+👉 [Ver Código en GitHub](https://github.com/urian121/implementar-loading-request-durante-el-envio-de-formularios-con-reactjs)
+
 
 ### Implementación de Filtrado Dinámico en Next.js con Loading Request
 
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/filtrado-dinamico-con-checkbox-en-Nextjs-y-usando-el-paquete-loading-request.gif)
 👉 [Ver Código en GitHub](https://github.com/urian121/filtrado-dinamico-con-checkbox-en-nextjs-y-loading-request)
+
+
+### Implementación de Filtros Checkbox en ReactJS utilizando el paquete Loading Request
+
+![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/checkbox-filters-with-reactjs-loading-request.gif)
+👉 [Ver Código en GitHub](https://github.com/urian121/checkbox-filters-with-reactjs)
+
 
 ## Instalación
 
