@@ -1,6 +1,6 @@
 {
   "name": "loading-request",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Loading Request es un paquete npm versátil, diseñado para mejorar la experiencia del usuario mostrando indicadores de carga durante solicitudes y procesos asincrónicos en aplicaciones web. Compatible con frameworks populares como React, Vue, Angular, Svelte, Next.js, y Astro, este paquete simplifica la implementación de spinners, barras de progreso y otros indicadores visuales.",
   "type": "module",
   "main": "dist/index.js",
