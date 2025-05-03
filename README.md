@@ -5,7 +5,9 @@
 [![npm](https://img.shields.io/npm/dt/loading-request.svg)](https://www.npmjs.com/package/loading-request)
 [![License](https://img.shields.io/badge/license-ISC-blue.svg?style=flat-square)](https://opensource.org/licenses/ISC)
 
-**Loading Request** es un paquete npm versátil, diseñado para mejorar la experiencia del usuario mostrando indicadores de carga durante solicitudes y procesos asincrónicos en aplicaciones web. Compatible con frameworks populares como React, Vue, Angular, Svelte, Next.js, y Astro, este paquete simplifica la implementación de spinners, barras de progreso y otros indicadores visuales.
+**Loading Request** es un paquete npm moderno, intuitivo, liviano y flexible, diseñado para mejorar la experiencia del usuario mostrando indicadores de carga durante solicitudes y procesos asincrónicos en aplicaciones web. Compatible con frameworks populares como React, Vue, Angular, Svelte, Next.js, y Astro, este paquete simplifica la implementación de spinners, barras de progreso y otros indicadores visuales.
+
+![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/Loading-Request-formulario.gif)
 
 ## ¿Para qué fue creado?
 
@@ -322,13 +324,13 @@ hideLoading({ timeLoading: 1500 });
 
 Si encuentras algún problema o tienes una idea para mejorar el paquete, por favor abre un issue o envía un pull request en GitHub: https://github.com/urian121/loading-request
 
-## Desarrollado por
+## 👨‍💻 Desarrollador
 
-- [Urian Viera](https://github.com/urian123)
-- [Mi portafolio](https://www.urianviera.com)
-- [Canal de Youtube](https://www.youtube.com/WebDeveloperUrianViera)
-- [¡Donar a través de PayPal!](https://www.paypal.com/donate/?hosted_button_id=4SV78MQJJH3VE)
-- [Email](mailto:urian1213viera@gmail.com)
+**Urian Viera**  
+🌐 [urianviera.com](https://www.urianviera.com)  
+📺 [YouTube](https://www.youtube.com/WebDeveloperUrianViera)  
+💌 [urian1213viera@gmail.com](mailto:urian1213viera@gmail.com)  
+☕ [¡Apóyame en PayPal!](https://www.paypal.com/donate/?hosted_button_id=4SV78MQJJH3VE)
 
 ## Copyright
 
