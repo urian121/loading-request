@@ -39,18 +39,15 @@ Con **Loading Request,** puedes ofrecer una experiencia de usuario más fluida y
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/Loading-Request-formulario.gif)
 👉 [Ver Código en GitHub](https://github.com/urian121/implementar-loading-request-durante-el-envio-de-formularios-con-reactjs)
 
-
 ### Implementación de Filtrado Dinámico en Next.js con Loading Request
 
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/filtrado-dinamico-con-checkbox-en-Nextjs-y-usando-el-paquete-loading-request.gif)
 👉 [Ver Código en GitHub](https://github.com/urian121/filtrado-dinamico-con-checkbox-en-nextjs-y-loading-request)
 
-
 ### Implementación de Filtros Checkbox en ReactJS utilizando el paquete Loading Request
 
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/checkbox-filters-with-reactjs-loading-request.gif)
 👉 [Ver Código en GitHub](https://github.com/urian121/checkbox-filters-with-reactjs)
-
 
 ## Instalación
 
@@ -118,7 +115,12 @@ export default function ApiSimpson() {
           {data.map((personaje, index) => (
             <div key={index} className="card">
               <div>{personaje.character}</div>
-              <Image width={200} height={200} src={personaje.image} alt={personaje.character} />
+              <Image
+                width={200}
+                height={200}
+                src={personaje.image}
+                alt={personaje.character}
+              />
             </div>
           ))}
         </div>
@@ -234,7 +236,10 @@ También puedes incluir `loading-request` directamente en tu proyecto utilizando
 
 ```html
 <!-- Incluye el CSS -->
-<link rel="stylesheet" href="https://unpkg.com/loading-request/dist/index.css" />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/loading-request/dist/index.css"
+/>
 
 <!-- Incluye el JavaScript -->
 <script src="https://unpkg.com/loading-request/dist/index.js"></script>
@@ -250,30 +255,30 @@ TypeScript como se muestra en los ejemplos de uso.
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Loading Request</title>
-    <!-- Incluir el CSS de loading-request desde CDN -->
-    <link rel="stylesheet" href="https://unpkg.com/loading-request/dist/index.css" />
   </head>
   <body>
     <button id="btnLoading">Mostrar Loading</button>
 
-    <!-- Incluir el JavaScript de loading-request desde CDN como módulo -->
-    <script type="module">
-      import { showLoading, hideLoading } from "https://unpkg.com/loading-request/dist/index.js";
+    <!-- Incluir el JavaScript de loading-request desde CDN -->
+    <script src="https://unpkg.com/loading-request/dist/loading-request.umd.js"></script>
 
+    <script>
       // Función para mostrar el loading
       function handleShowLoading() {
-        showLoading({
+        loadingRequest.showLoading({
           message: "Cargando App...",
           spinnerColor: "#f3752b",
           textLoadingColor: "#EE5E09",
           textLoadingSize: "16px",
         });
 
-        hideLoading();
+        loadingRequest.hideLoading();
       }
 
       // Asociar la función al botón
-      document.querySelector("#btnLoading").addEventListener("click", handleShowLoading);
+      document
+        .querySelector("#btnLoading")
+        .addEventListener("click", handleShowLoading);
     </script>
   </body>
 </html>

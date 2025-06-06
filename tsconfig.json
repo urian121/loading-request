@@ -10,5 +10,5 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*.ts", "interfaces/**/*.ts"]
+  "include": ["src/**/*.ts", "interfaces/**/*.ts", "declarations.d.ts"]
 }

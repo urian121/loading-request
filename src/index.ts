@@ -1,5 +1,18 @@
-import "./loading.css"; // Importando el archivo CSS
 import { ShowLoadingOptions, HideLoadingOptions } from "../interfaces/index";
+// Importar CSS como módulo
+import css from "./loading.css?inline";
+
+// Inyectar estilos al documento
+const injectStyles = () => {
+  if (typeof document !== "undefined") {
+    const style = document.createElement("style");
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+};
+
+// Inyectar estilos al cargar el módulo
+injectStyles();
 
 /**
  * Muestra un indicador de carga con opciones personalizables.
@@ -13,7 +26,12 @@ import { ShowLoadingOptions, HideLoadingOptions } from "../interfaces/index";
  */
 const showLoading = (options: ShowLoadingOptions = {}) => {
   // Haciendo uso de destructuración para extraer las opciones y asignar valores predeterminados si no se proporcionan.
-  const { message = "Cargando...", spinnerColor, textLoadingColor, textLoadingSize } = options;
+  const {
+    message = "Cargando...",
+    spinnerColor,
+    textLoadingColor,
+    textLoadingSize,
+  } = options;
 
   const loadingOverlay = document.createElement("div");
   loadingOverlay.className = "page-loading active";
@@ -59,3 +77,9 @@ const hideLoading = (options: HideLoadingOptions = {}) => {
 
 // Exportando las funciones para que puedan ser utilizadas en otros archivos
 export { showLoading, hideLoading };
+
+// Export global para CDN
+(window as any).loadingRequest = {
+  showLoading,
+  hideLoading,
+};

@@ -3,13 +3,14 @@
   "version": "2.3.0",
   "description": "Loading Request es un paquete npm moderno, intuitivo, liviano y flexible, diseñado para mejorar la experiencia del usuario mostrando indicadores de carga durante solicitudes y procesos asincrónicos en aplicaciones web. Compatible con frameworks populares como React, Vue, Angular, Svelte, Next.js, y Astro, este paquete simplifica la implementación de spinners, barras de progreso y otros indicadores visuales.",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "dist/loading-request.umd.js",
   "types": "dist/index.d.ts",
-  "module": "dist/index.js",
+  "module": "dist/loading-request.es.js",
   "scripts": {
-    "start": "rollup -c -w",
+    "dev": "vite",
+    "build": "vite build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup -c",
+    "preview": "vite preview",
     "publish": "npm run build && npm publish --access public"
   },
   "repository": {
@@ -106,10 +107,9 @@
   "homepage": "https://envio-form-con-loading-request.vercel.app",
   "devDependencies": {
     "@types/node": "^20.14.9",
+    "@vitejs/plugin-legacy": "^6.1.1",
     "postcss": "^8.4.39",
-    "rollup": "^4.18.1",
-    "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-typescript2": "^0.36.0",
-    "typescript": "^5.5.3"
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
   }
 }
