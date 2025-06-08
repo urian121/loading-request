@@ -58,7 +58,6 @@ Con **Loading Request,** puedes ofrecer una experiencia de usuario más fluida y
 
 ```jsx
 import { showLoading, hideLoading } from "loading-request";
-import "loading-request/dist/index.css";
 
 const App = () => {
   const handleShowLoading = () => {
@@ -87,7 +86,6 @@ import { getSimpson } from "../actions/getSimpson";
 import Image from "next/image";
 
 import { showLoading, hideLoading } from "loading-request";
-import "loading-request/dist/index.css";
 
 export default function ApiSimpson() {
   const [data, setData] = useState(null);
@@ -143,7 +141,6 @@ export default function ApiSimpson() {
   import svelteLogo from "./assets/svelte.svg";
 
   import { showLoading, hideLoading } from "loading-request";
-  import "loading-request/dist/index.css";
 
   let personas = null;
  async function fetchPersonas() {
@@ -209,7 +206,6 @@ export default function ApiSimpson() {
 ```vue
 <script setup>
 import { showLoading, hideLoading } from "loading-request";
-import "loading-request/dist/index.css";
 
 const handleShowLoading = () => {
   showLoading({
