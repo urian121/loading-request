@@ -242,9 +242,9 @@ También puedes incluir `loading-request` directamente en tu proyecto utilizando
     <button id="btnLoading">Mostrar Loading</button>
 
     <!-- Incluir el JavaScript de loading-request desde CDN -->
-    <script src="https://unpkg.com/loading-request@2.13.0/dist/loading-request.umd.js"></script>
+    <script src="https://unpkg.com/loading-request@2.14.0/dist/loading-request.umd.js"></script>
     <!-- Alternativa usando jsDelivr -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/loading-request@2.13.0/dist/loading-request.umd.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/loading-request@2.14.0/dist/loading-request.umd.js"></script> -->
 
     <script>
       // Función para mostrar el loading

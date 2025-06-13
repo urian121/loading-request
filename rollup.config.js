@@ -10,18 +10,18 @@ export default [
       {
         file: "dist/index.js",
         format: "cjs",
-        sourcemap: true,
+        sourcemap: false,
       },
       {
         file: "dist/index.mjs",
         format: "esm",
-        sourcemap: true,
+        sourcemap: false,
       },
       {
         file: "dist/loading-request.umd.js",
         format: "umd",
         name: "loadingRequest",
-        sourcemap: true,
+        sourcemap: false,
       },
     ],
     plugins: [
