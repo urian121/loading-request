@@ -1,18 +1,23 @@
-import { ShowLoadingOptions, HideLoadingOptions } from "../interfaces/index";
-// Importar CSS como módulo
-import css from "./loading.css?inline";
+import css from "./loading.css";
 
-// Inyectar estilos al documento
-const injectStyles = () => {
-  if (typeof document !== "undefined") {
-    const style = document.createElement("style");
-    style.textContent = css;
-    document.head.appendChild(style);
-  }
-};
+if (typeof window !== "undefined" && typeof document !== "undefined") {
+  const style = document.createElement("style");
+  style.textContent = css;
+  document.head.appendChild(style);
+}
 
-// Inyectar estilos al cargar el módulo
-injectStyles();
+// Definición de la interfaz para las opciones de mostrar loading
+export interface ShowLoadingOptions {
+  message?: string;
+  spinnerColor?: string;
+  textLoadingColor?: string;
+  textLoadingSize?: string;
+}
+
+// Definición de la interfaz para las opciones de ocultar el loading
+export interface HideLoadingOptions {
+  timeLoading?: number;
+}
 
 /**
  * Muestra un indicador de carga con opciones personalizables.

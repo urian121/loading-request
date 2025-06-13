@@ -231,20 +231,6 @@ const handleShowLoading = () => {
 También puedes incluir `loading-request` directamente en tu proyecto utilizando un enlace CDN. Sigue estos pasos:
 
 ```html
-<!-- Incluye el CSS -->
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/loading-request/dist/index.css"
-/>
-
-<!-- Incluye el JavaScript -->
-<script src="https://unpkg.com/loading-request/dist/index.js"></script>
-```
-
-Una vez incluido, podrás utilizar **showLoading** y **hideLoading** en tu código JavaScript o
-TypeScript como se muestra en los ejemplos de uso.
-
-```html
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -256,7 +242,10 @@ TypeScript como se muestra en los ejemplos de uso.
     <button id="btnLoading">Mostrar Loading</button>
 
     <!-- Incluir el JavaScript de loading-request desde CDN -->
-    <script src="https://unpkg.com/loading-request/dist/loading-request.umd.js"></script>
+    <script src="https://unpkg.com/loading-request@2.11.0/dist/index.js"></script>
+    
+    <!-- Alternativa usando jsDelivr -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/loading-request@2.11.0/dist/index.js"></script> -->
 
     <script>
       // Función para mostrar el loading
@@ -268,7 +257,7 @@ TypeScript como se muestra en los ejemplos de uso.
           textLoadingSize: "16px",
         });
 
-        loadingRequest.hideLoading();
+        loadingRequest.hideLoading({ timeLoading: 1500 });
       }
 
       // Asociar la función al botón
@@ -279,6 +268,13 @@ TypeScript como se muestra en los ejemplos de uso.
   </body>
 </html>
 ```
+
+### Notas importantes sobre el uso con CDN:
+
+- El archivo se carga como un módulo UMD (Universal Module Definition), lo que significa que puedes usarlo tanto en navegadores modernos como en entornos más antiguos.
+- La librería expone un objeto global `loadingRequest` con los métodos `showLoading` y `hideLoading`.
+- El tamaño del archivo es de aproximadamente 2.5KB (minificado).
+- Se recomienda especificar la versión en la URL del CDN para evitar problemas de compatibilidad.
 
 ## API
 
