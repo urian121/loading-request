@@ -17,19 +17,25 @@ export default [
         format: "esm",
         sourcemap: true,
       },
+      {
+        file: "dist/loading-request.umd.js",
+        format: "umd",
+        name: "loadingRequest",
+        sourcemap: true,
+      },
     ],
     plugins: [
       {
-        name: 'css-loader',
+        name: "css-loader",
         transform(code, id) {
-          if (id.endsWith('.css')) {
-            const css = readFileSync(id, 'utf-8');
+          if (id.endsWith(".css")) {
+            const css = readFileSync(id, "utf-8");
             return {
               code: `export default ${JSON.stringify(css)};`,
-              map: null
+              map: null,
             };
           }
-        }
+        },
       },
       typescript({ tsconfig: "./tsconfig.json" }),
       terser(),
