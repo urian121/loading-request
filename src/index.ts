@@ -1,11 +1,5 @@
 import css from "./loading.css";
 
-if (typeof window !== "undefined" && typeof document !== "undefined") {
-  const style = document.createElement("style");
-  style.textContent = css;
-  document.head.appendChild(style);
-}
-
 // Definición de la interfaz para las opciones de mostrar loading
 export interface ShowLoadingOptions {
   message?: string;
@@ -19,6 +13,19 @@ export interface HideLoadingOptions {
   timeLoading?: number;
 }
 
+const injectStyle = () => {
+  if (
+    typeof window !== "undefined" &&
+    typeof document !== "undefined" &&
+    !document.querySelector("style[data-loading-style]")
+  ) {
+    const style = document.createElement("style");
+    style.setAttribute("data-loading-style", "true");
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+};
+
 /**
  * Muestra un indicador de carga con opciones personalizables.
  *
@@ -30,7 +37,10 @@ export interface HideLoadingOptions {
  *                - `textLoadingSize`: Tamaño opcional del texto del mensaje de carga. Se aplica dinámicamente si se proporciona.
  */
 const showLoading = (options: ShowLoadingOptions = {}) => {
-  // Haciendo uso de destructuración para extraer las opciones y asignar valores predeterminados si no se proporcionan.
+  if (typeof window === "undefined" || typeof document === "undefined") return;
+
+  injectStyle();
+
   const {
     message = "Cargando...",
     spinnerColor,
@@ -70,21 +80,22 @@ const showLoading = (options: ShowLoadingOptions = {}) => {
  *                  Por defecto es 500ms.
  */
 const hideLoading = (options: HideLoadingOptions = {}) => {
+  if (typeof document === "undefined") return;
+
   const { timeLoading = 500 } = options;
   const loadingOverlay = document.querySelector(".page-loading.active");
   if (loadingOverlay) {
     setTimeout(() => {
-      loadingOverlay.parentElement?.removeChild(loadingOverlay);
-      loadingOverlay.classList.remove("active");
+      loadingOverlay.remove();
     }, timeLoading);
   }
 };
 
-// Exportando las funciones para que puedan ser utilizadas en otros archivos
 export { showLoading, hideLoading };
 
-// Export global para CDN
-(window as any).loadingRequest = {
-  showLoading,
-  hideLoading,
-};
+if (typeof window !== "undefined") {
+  (window as any).loadingRequest = {
+    showLoading,
+    hideLoading,
+  };
+}
