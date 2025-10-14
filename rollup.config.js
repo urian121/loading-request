@@ -8,19 +8,14 @@ export default [
     input: "src/index.ts",
     output: [
       {
-        file: "dist/index.js",
-        format: "cjs",
-        sourcemap: false,
-      },
-      {
-        file: "dist/index.mjs",
-        format: "esm",
-        sourcemap: false,
-      },
-      {
-        file: "dist/loading-request.umd.js",
+        file: "dist/loading-request.min.js",
         format: "umd",
         name: "loadingRequest",
+        sourcemap: false,
+      },
+      {
+        file: "dist/loading-request.es.min.js",
+        format: "esm",
         sourcemap: false,
       },
     ],

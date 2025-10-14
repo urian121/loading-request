@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Request</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .test-card {
+            padding: 1.5rem;
+            border: 2px solid #f0f0f0;
+            border-radius: 0.75rem;
+            background: #fafafa;
+        }
+        
+        .test-card h3 {
+            color: #7366ff;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        button {
+            background: #7366ff;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            transition: all 0.2s;
+            width: 100%;
+        }
+        
+        button:hover {
+            background: #5a52d5;
+            transform: translateY(-2px);
+        }
+        
+        .status {
+            background: #e8f5e8;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid #28a745;
+            font-weight: 600;
+        }
+        
+        .error {
+            background: #ffe8e8;
+            border-left-color: #dc3545;
+        }
+        
+        .info {
+            background: #e8f4fd;
+            border-left-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Loading Request</h1>
+        
+        <div class="test-grid">
+            <div class="test-card">
+                <h3>⚡ Loading Manual</h3>
+                <p>Control manual del loading</p>
+                <button onclick="testManual()">Probar Loading Manual</button>
+            </div>
+            
+            <div class="test-card">
+                <h3>⏱️ Temporal</h3>
+                <p>Loading que se oculta automáticamente</p>
+                <button onclick="testTemp()">Probar Temporal</button>
+            </div>
+            
+            <div class="test-card">
+                <h3>🔄 Actualización</h3>
+                <p>Cambios dinámicos en tiempo real</p>
+                <button onclick="testUpdate()">Probar Update</button>
+            </div>
+            
+            <div class="test-card">
+                <h3>🔧 Tiempo Mínimo</h3>
+                <p>Garantiza duración mínima visible</p>
+                <button onclick="testMinDuration()">Probar MinDuration</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cargar la librería compilada -->
+    <script src="./dist/loading-request.min.js"></script>
+    
+    <script>        
+        // Helper para simular trabajo async
+        const simulateWork = (ms = 1500) => new Promise(resolve => setTimeout(resolve, ms));
+        
+        // Test 1: Loading manual
+        window.testManual = async () => {
+            const loading = loadingRequest.show({
+                message: 'Procesando datos...',
+                spinnerColor: '#3b82f6',
+                minDuration: 1000
+            });
+
+            try {
+                // Simular trabajo async
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Actualizar mensaje
+                loading.update({ message: 'Finalizando...' });
+                
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                console.log('Proceso completado');
+            } catch (error) {
+                console.error('Error en proceso:', error);
+            } finally {
+                await loading.hide();
+            }
+        };
+        
+        // Test 2: Loading temporal
+        window.testTemp = () => {
+            try {
+                loadingRequest.showTemp({
+                    message: '¡Guardado exitoso!',
+                    spinnerColor: '#28a745',
+                    textColor: '#28a745'
+                }, 3000);
+            } catch (error) {
+                console.error('Error en temporal:', error.message);
+            }
+        };
+        
+        // Test 3: Actualización dinámica
+        window.testUpdate = async () => {
+            try {
+                const loading = loadingRequest.show({ 
+                    message: 'Iniciando proceso...' 
+                });
+                
+                setTimeout(() => {
+                    loading.update({ 
+                        message: 'Procesando datos...', 
+                        spinnerColor: '#ffa500',
+                        textColor: '#ffa500'
+                    });
+                }, 1000);
+                
+                setTimeout(() => {
+                    loading.update({ 
+                        message: 'Finalizando...', 
+                        spinnerColor: '#28a745',
+                        textColor: '#28a745'
+                    });
+                }, 2500);
+                
+                setTimeout(async () => {
+                    await loading.hide();
+                }, 4000);
+                
+            } catch (error) {
+                console.error('Error en actualización:', error.message);
+            }
+        };
+        
+        // Test 4: Tiempo mínimo
+        window.testMinDuration = async () => {
+            try {
+                const startTime = Date.now();
+                
+                const loading = loadingRequest.show({
+                    message: 'Proceso rápido con tiempo mínimo...',
+                    minDuration: 3000 // 3 segundos mínimo
+                });
+                
+                // Simular proceso que termina rápido (500ms)
+                await simulateWork(500);
+                await loading.hide(); // Pero se mantendrá visible 3 segundos
+                
+                const elapsed = Date.now() - startTime;
+                console.log(`Tiempo mínimo respetado: ${Math.round(elapsed)}ms (mínimo 3000ms)`);
+            } catch (error) {
+                console.error('Error en tiempo mínimo:', error.message);
+            }
+        };
+    </script>
+</body>
+</html>
