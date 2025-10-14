@@ -5,13 +5,11 @@
 [![npm](https://img.shields.io/npm/dt/loading-request.svg)](https://www.npmjs.com/package/loading-request)
 [![License](https://img.shields.io/badge/license-ISC-blue.svg?style=flat-square)](https://opensource.org/licenses/ISC)
 
-**Loading Request** es un paquete npm moderno, intuitivo, liviano y flexible, diseñado para mejorar la experiencia del usuario mostrando indicadores de carga durante solicitudes y procesos asincrónicos en aplicaciones web. Compatible con frameworks populares como React, Vue, Svelte, Next.js, y Astro, este paquete simplifica la implementación de spinners, barras de progreso y otros indicadores visuales.
+**Loading Request** es la librería más potente para mostrar indicadores de carga modernos en aplicaciones web. Compatible con React, Vue, Svelte, Next.js, Astro y proyectos vanilla JavaScript a través de CDN.
+
+Mejora la experiencia de usuario con indicadores de carga elegantes y personalizables. Reduce la ansiedad durante procesos asincrónicos y aumenta la percepción de rendimiento de tu aplicación.
 
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/Loading-Request-formulario.gif)
-
-## ¿Por qué Loading Request?
-
-**Loading Request** facilita la incorporación de indicadores de carga en aplicaciones JavaScript, proporcionando una solución rápida y eficiente para mostrar que una solicitud o proceso está en curso. Este paquete responde a la necesidad de mejorar la usabilidad y percepción del rendimiento en aplicaciones web al proporcionar una visualización clara y atractiva del estado de carga, evitando la incertidumbre del usuario durante procesos asincrónicos.
 
 ## Instalación
 
@@ -22,120 +20,194 @@ yarn add loading-request
 
 ## Uso Básico
 
-### **1. Formulario con Confirmación**
-Ejemplo completo que muestra loading durante el envío, actualiza el mensaje dinámicamente y mantiene feedback visual antes de ocultar.
-Ideal para formularios de contacto, registro o cualquier proceso que requiera confirmación visual al usuario.
+### **1. React con Hooks**
+Integración perfecta con React usando hooks personalizados y componentes funcionales. Ideal para aplicaciones SPA modernas.
 
-```javascript
+```jsx
+import { useState } from 'react';
 import { showLoading, hideLoading, updateLoading } from 'loading-request';
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  
-  showLoading({
-    message: 'Enviando mensaje...',
-    spinnerColor: '#10b981',
-    minDuration: 1000
-  });
+const ContactForm = () => {
+  const [formData, setFormData] = useState({ name: '', email: ''});
 
-  try {
-    const formData = new FormData(e.target);
-    await fetch('/api/contact', { method: 'POST', body: formData });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     
-    // Actualizar mensaje de confirmación
-    updateLoading({ 
-      message: '¡Mensaje enviado!',
-      spinnerColor: '#10b981'
+    showLoading({
+      message: 'Enviando mensaje...',
+      spinnerColor: '#3b82f6',
+      minDuration: 1000
     });
-    
-    // Esperar un poco antes de ocultar
-    setTimeout(async () => {
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        updateLoading({ 
+          message: '¡Mensaje enviado exitosamente!',
+          spinnerColor: '#10b981'
+        });
+        
+        setTimeout(async () => {
+          await hideLoading();
+          setFormData({ name: '', email: '' });
+        }, 2000);
+      }
+    } catch {
+      updateLoading({ 
+        message: 'Error al enviar mensaje',
+        spinnerColor: '#ef4444'
+      });
+      setTimeout(() => hideLoading(), 2000);
+    } finally {
       await hideLoading();
-    }, 2000);
-  } catch (error) {
-    await hideLoading();
-  }
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Nombre"
+        value={formData.name}
+        onChange={(e) => setFormData({...formData, name: e.target.value})}
+        required
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        value={formData.email}
+        onChange={(e) => setFormData({...formData, email: e.target.value})}
+        required
+      />
+      <button type="submit">Enviar</button>
+    </form>
+  );
 };
 
-document.querySelector('#contactForm').addEventListener('submit', handleSubmit);
+export default ContactForm;
 ```
 
-### **2. Actualización Dinámica**
-A continuación, se muestra cómo actualizar el mensaje y el color del spinner en función del progreso de un proceso. Ideal para procesos que requieren feedback visual en tiempo real.
+### **2. Next.js con App Router**
+Consumiendo la API de Usuarios de Devs API Hub y optimizando actualizaciones con `useTransition`.
 
-```javascript
-import { showLoading, updateLoading, hideLoading } from 'loading-request';
+```jsx
+'use client';
 
-const handleProcess = async () => {
-  showLoading({ message: 'Iniciando...' });
-  
-  // Actualizar mensaje dinámicamente
-  setTimeout(() => {
-    updateLoading({ 
-      message: 'Procesando datos...', 
-      spinnerColor: '#ffa500' 
+import { useState } from 'react';
+import { showLoading, hideLoading, updateLoading } from 'loading-request';
+
+export default function Users() {
+  const [users, setUsers] = useState([]);
+
+  const fetchUsers = async () => {
+    showLoading({
+      message: 'Cargando usuarios...',
+      spinnerColor: '#8b5cf6',
     });
-  }, 1000);
-  
-  setTimeout(() => {
-    updateLoading({ 
-      message: 'Finalizando...', 
-      spinnerColor: '#28a745' 
-    });
-  }, 2000);
-  
-  setTimeout(async () => {
-    await hideLoading();
-  }, 3000);
-};
 
-document.querySelector('#processBtn').addEventListener('click', handleProcess);
+    try {
+      const res = await fetch('https://devsapihub.com/api-users', { cache: 'no-store' });
+      if (!res.ok) throw new Error('Error al obtener usuarios');
+      const data = await res.json();
+
+      updateLoading({
+        message: `Usuarios cargados (${data?.length || 0})`,
+        spinnerColor: '#10b981'
+      });
+
+      setUsers(data);
+    } catch {
+      updateLoading({
+        message: 'Error al cargar usuarios',
+        spinnerColor: '#ef4444'
+      });
+    } finally {
+    setTimeout(hideLoading, 1000);
+    }
+  };
+
+  return (
+    <>
+      <button onClick={fetchUsers}>
+        {users.length ? 'Recargar Usuarios' : 'Cargar Usuarios'}
+      </button>
+
+      {!!users.length && (
+        <ul>
+          {users.map(user => (
+            <li key={user.id}>
+              <img src={user.avatar_url} alt={user.name} width={40} height={40} />
+              <div>
+                <strong>{user.name}</strong> 
+                <span>{user.email}</span>
+                <small>
+                  {user.online ? '🟢 Online' : '⚪ Offline'}
+                </small>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  );
+}
 ```
 
-### **3. Loading Automático en Peticiones HTTP**
-Para este ejemplo, se muestra cómo mostrar loading automáticamente cuando se realiza una solicitud HTTP y ocultarlo cuando la respuesta se recibe. Ideal para procesos que requieren feedback visual en tiempo real.
+### **3. React: Consumo de API Fast Food**
+Ejemplo corto con React que consume la API pública y muestra un listado de productos.
 
-```javascript
-import { showLoading, hideLoading } from 'loading-request';
+```jsx
+import { useEffect, useState } from 'react';
+import { showLoading, hideLoading, updateLoading } from 'loading-request';
 
-// Función para obtener datos del servidor
-async function obtenerDatos() {
-  showLoading({ message: 'Cargando usuarios...' });
-  try {
-    const response = await fetch('/api/usuarios');
-    const datos = await response.json();
-    console.log(datos);
-    return datos;
-  } finally {
-    await hideLoading();
-  }
+export default function FastFoodList() {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const load = async () => {
+      showLoading(
+        { 
+            message: 'Cargando menú...',
+            spinnerColor: '#f59e0b',
+            minDuration: 600 
+        });
+      try {
+        const res = await fetch('https://devsapihub.com/api-fast-food', { cache: 'no-store' });
+        if (!res.ok) throw new Error('Error al obtener menú');
+        const data = await res.json();
+        setItems(data);
+        updateLoading({ message: `Productos (${data.length})`, spinnerColor: '#10b981' });
+      } catch (e) {
+        updateLoading({ message: 'Error al cargar menú ' + e.message, spinnerColor: '#ef4444' });
+      } finally {
+        setTimeout(hideLoading, 800);
+      }
+    };
+    load();
+  }, []);
+
+  return (
+    <ul>
+      {items.map(item => (
+        <li key={item.id}>
+          <img src={item.image} alt={item.name} width={50} height={50} />
+          <span>{item.name} — ${item.price}</span>
+        </li>
+      ))}
+    </ul>
+  );
 }
-
-// Función para guardar datos
-async function guardarUsuario(usuario) {
-  showLoading({ 
-    message: 'Guardando usuario...', 
-    spinnerColor: '#10b981' 
-  });
-  try {
-    await fetch('/api/usuarios', {
-      method: 'POST',
-      body: JSON.stringify(usuario)
-    });
-    alert('Usuario guardado exitosamente');
-  } finally {
-    await hideLoading();
-  }
-}
-
-// Uso
-obtenerDatos();
-guardarUsuario({ nombre: 'Juan', email: 'juan@email.com' });
 ```
 
 ## Implementar Loading Request en el envío de un formulario
 
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/Loading-Request-formulario.gif)
+
 👉 [Ver Código en GitHub](https://github.com/urian121/implementar-loading-request-durante-el-envio-de-formularios-con-reactjs)
 
 ### Implementación de Filtrado Dinámico en Next.js con Loading Request
@@ -168,141 +240,6 @@ updateLoading({ message: 'Casi listo...' });
 await hideLoading();
 ```
 
-## Ejemplo Práctico utilizando Next.js
-
-```jsx
-'use client';
-import { useState } from 'react';
-import { showLoading, updateLoading, hideLoading } from 'loading-request';
-
-export default function ProductPage() {
-  const [products, setProducts] = useState([]);
-
-  // Cargar productos con loading
-  const fetchProducts = async () => {
-    showLoading({
-      message: 'Cargando productos...',
-      spinnerColor: '#3b82f6'
-    });
-    
-    try {
-      const response = await fetch('/api/products');
-      const data = await response.json();
-      setProducts(data);
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      await hideLoading();
-    }
-  };
-
-  // Eliminar producto con loading dinámico
-  const deleteProduct = async (id) => {
-    showLoading({
-      message: 'Eliminando producto...',
-      spinnerColor: '#ef4444',
-      minDuration: 800
-    });
-
-    try {
-      await fetch(`/api/products/${id}`, { method: 'DELETE' });
-      
-      // Actualizar mensaje de éxito
-      updateLoading({ 
-        message: '¡Eliminado!', 
-        spinnerColor: '#10b981' 
-      });
-      
-      // Esperar un poco antes de ocultar
-      setTimeout(async () => {
-        await hideLoading();
-        fetchProducts(); // Recargar lista
-      }, 1000);
-      
-    } catch (error) {
-      await hideLoading();
-      
-      // Mostrar error temporalmente
-      showLoading({
-        message: 'Error al eliminar',
-        spinnerColor: '#ef4444',
-        minDuration: 0
-      });
-      
-      setTimeout(async () => {
-        await hideLoading();
-      }, 2000);
-    }
-  };
-
-  return (
-    <div>
-      <button onClick={fetchProducts}>
-        Cargar Productos
-      </button>
-      
-      {products.map(product => (
-        <div key={product.id}>
-          <h3>{product.name}</h3>
-          <button onClick={() => deleteProduct(product.id)}>
-            Eliminar
-          </button>
-        </div>
-      ))}
-    </div>
-  );
-}
-```
-
-## API Clásica
-
-```jsx
-"use client";
-import { useState } from "react";
-import { getSimpson } from "../actions/getSimpson";
-import Image from "next/image";
-import { showLoading, hideLoading } from "loading-request";
-
-export default function ApiSimpson() {
-  const [data, setData] = useState(null);
-
-  const handleGetSimpson = async () => {
-    showLoading({ message: "Cargando API..." });
-    try {
-      const data = await getSimpson();
-      setData(data);
-    } catch (error) {
-      console.error("Error al obtener los datos:", error);
-    } finally {
-      await hideLoading();
-    }
-  };
-
-  return (
-    <>
-      <button className="my-4" onClick={handleGetSimpson}>
-        Obtener personajes
-      </button>
-
-      {data && (
-        <div className="cards">
-          {data.map((personaje, index) => (
-            <div key={index} className="card">
-              <div>{personaje.character}</div>
-              <Image
-                width={200}
-                height={200}
-                src={personaje.image}
-                alt={personaje.character}
-              />
-            </div>
-          ))}
-        </div>
-      )}
-    </>
-  );
-}
-```
 
 ## Mostrando Resultados de una API REST en Next.js
 
@@ -310,99 +247,12 @@ export default function ApiSimpson() {
 
 👉 [Ver Código en GitHub](https://github.com/urian121/loading-request-con-nextjs)
 
-## Ejemplo Práctico utilizando Svelte.js
-
-```js
-<script>
-  import svelteLogo from "./assets/svelte.svg";
-  import { showLoading, hideLoading } from "loading-request";
-
-  let personas = null;
-  
-  async function fetchPersonas() {
-    showLoading({
-      message: "Cargando Solicitud...",
-      spinnerColor: "#f3752b",
-      textColor: "#EE5E09",
-      textSize: "18px",
-    });
-
-    try {
-      const URL = "https://reqres.in/api/users?page=1";
-      const response = await fetch(URL);
-      if (!response.ok) {
-        throw new Error('Error en la solicitud');
-      }
-      personas = await response.json();
-    } catch (err) {
-      console.log('Error al cargar la API:', err.message);
-    } finally {
-      await hideLoading();
-    }
-  }
-</script>
-
-<main>
-  <h1>
-    <button on:click={fetchPersonas}> Cargar API</button>
-    <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-  </h1>
-
-  {#if personas}
-    <ul class="user-list">
-      {#each personas.data as persona (persona.id)}
-        <li class="user-item">
-          <img
-            src={persona.avatar}
-            alt={persona.first_name}
-            class="user-avatar"
-          />
-          <div class="user-details">
-            <p class="user-details__name">
-              Nombre: {persona.first_name}
-            </p>
-            <p class="user-details__email">Email: {persona.email}</p>
-          </div>
-        </li>
-      {/each}
-    </ul>
-  {/if}
-</main>
-```
-
 ## Resultado Completo del Ejemplo Práctico con Svelte
 
 ![](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/loading-request-con-svelte.gif)
 
 👉 [Ver Código en GitHub](https://github.com/urian121/loading-request-con-svelte)
 
-## Ejemplo Práctico en Vue.js
-
-```js
-<script setup>
-import { showLoading, hideLoading } from "loading-request";
-
-const handleShowLoading = async () => {
-  showLoading({
-    message: "Cargando App...",
-    spinnerColor: "#f3752b",
-    textColor: "#EE5E09",
-    textSize: "20px",
-  });
-
-  // Simular proceso async
-  setTimeout(async () => {
-    await hideLoading();
-  }, 2000);
-};
-</script>
-
-<template>
-  <div id="app">
-    <button @click="handleShowLoading">Mostrar Loading</button>
-  </div>
-</template>
-```
 
 ## Uso a través de CDN
 
@@ -414,56 +264,73 @@ También puedes incluir `loading-request` directamente en tu proyecto utilizando
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Loading Request</title>
+    <title>Formulario con Loading Request</title>
   </head>
   <body>
-    <button id="btnLoading">Mostrar Loading</button>
+    <h2>Enviar mensaje</h2>
 
-    <!-- Incluir el JavaScript de loading-request desde CDN -->
-    <script src="https://unpkg.com/loading-request@2.15.0/dist/loading-request.min.js"></script>
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Nombre" required /><br /><br />
+      <input type="email" id="email" placeholder="Email" required /><br /><br />
+      <button type="submit">Enviar</button>
+    </form>
+
+    <!-- Incluir loading-request desde CDN -->
+    <script src="https://unpkg.com/loading-request@latest/dist/loading-request.min.js"></script>
+
     <script>
-      // Función para mostrar el loading
-      async function handleShowLoading() {
-        showLoading({
-          message: "Cargando App...",
-          spinnerColor: "#f3752b",
-          textColor: "#EE5E09",
-          textSize: "16px",
+      const form = document.getElementById("contactForm");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        if (!name || !email) return alert("Por favor completa todos los campos 😅");
+
+        loadingRequest.show({
+          message: "Enviando mensaje...",
+          spinnerColor: "#3b82f6",
+          textColor: "#333",
         });
 
-        // Simular proceso
-        setTimeout(async () => {
-          await hideLoading();
-        }, 2000);
-      }
+        try {
+          const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email }),
+          });
 
-      // Asociar la función al botón
-      document
-        .querySelector("#btnLoading")
-        .addEventListener("click", handleShowLoading);
+          if (!res.ok) throw new Error("Error al enviar el mensaje");
+
+          loadingRequest.update({
+            message: "¡Mensaje enviado exitosamente!",
+            spinnerColor: "#10b981",
+          });
+
+          form.reset();
+        } catch {
+          loadingRequest.update({
+            message: "Error al enviar mensaje 😞",
+            spinnerColor: "#ef4444",
+          });
+        } finally {
+          // Espera un poco antes de ocultar el loading
+          setTimeout(() => loadingRequest.hide(), 1500);
+        }
+      });
     </script>
   </body>
 </html>
 ```
 
-### Notas importantes sobre el uso con CDN:
-La librería expone las funciones `showLoading()`, `hideLoading()` y `updateLoading()` que deben ser importadas o usadas directamente.
+### CDN: uso correcto (UMD y ESM)
+Si cargas la librería desde CDN, usa la API global: `loadingRequest.show(...)`, `loadingRequest.hide()` y `loadingRequest.update(...)`. Si utilizas ESM con `<script type="module">`, importa las funciones: `import { showLoading, hideLoading, updateLoading } from 'loading-request'`.
 
 ## 📚 API Completa
 
 ### **showLoading(config?): void**
-
-Muestra un loading con configuración personalizada.
-
-**Parámetros de configuración**:
-- **message**: Mensaje a mostrar (default: 'Cargando...')
-- **spinnerColor**: Color del spinner (default: '#7366ff')
-- **textColor**: Color del texto (default: '#7366ff')
-- **textSize**: Tamaño del texto (default: '16px')
-- **backgroundColor**: Color de fondo (default: '#fff')
-- **opacity**: Opacidad del overlay (default: 0.90)
-- **minDuration**: Tiempo mínimo visible en ms (default: 500)
-
+`showLoading` Es una función que muestra un loading con configuración personalizada, puede recibir un objeto con los siguientes parámetros:
 ```js
 showLoading({
   message: 'Procesando...',
@@ -471,88 +338,37 @@ showLoading({
   minDuration: 1000
 });
 ```
+Todos los valores son opcionales, por lo que puedes mostrar el loading con la configuración por defecto.
+```js
+showLoading({ message: 'Procesando...'});
+```
+
+Muestra un loading con configuración personalizada.
+
+**Parámetros de configuración**:
+- **message**: Mensaje a mostrar (default: `'Cargando...'`)
+- **spinnerColor**: Color del spinner (default: `'#7366ff'`)
+- **textColor**: Color del texto (default: `'#7366ff'`)
+- **textSize**: Tamaño del texto (default: `'16px'`)
+- **backgroundColor**: Color de fondo (default: `'#fff'`)
+- **opacity**: Opacidad del overlay (default: `0.90`)
+- **minDuration**: Tiempo mínimo visible en ms (default: `500`)
 
 ### **hideLoading(): Promise<void>**
-
-Oculta el loading activo respetando automáticamente el `minDuration` configurado.
+`hideLoading` Es una función que oculta el loading activo respetando automáticamente el `minDuration` configurado.
 
 ```js
 await hideLoading(); // Respeta minDuration automáticamente
 ```
 
 ### **updateLoading(config): void**
-
-Actualiza la configuración del loading activo en tiempo real.
+`updateLoading` Es una función que actualiza la configuración del loading activo en tiempo real. Puedes cambiar el mensaje, el color del spinner, el color del texto, el tamaño del texto, el color de fondo y la opacidad del overlay.
 
 ```js
 updateLoading({ 
   message: 'Finalizando...', 
   spinnerColor: '#28a745' 
 });
-```
-
-## 🔧 Ejemplo Completo
-
-```js
-import { showLoading, updateLoading, hideLoading } from 'loading-request';
-
-class ProductPage {
-  constructor() {
-    this.products = [];
-  }
-
-  // Cargar productos con loading
-  async loadProducts() {
-    showLoading({ 
-      message: 'Cargando productos...',
-      spinnerColor: '#3b82f6'
-    });
-    
-    try {
-      const response = await fetch('/api/products');
-      this.products = await response.json();
-      this.renderProducts();
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      await hideLoading();
-    }
-  }
-
-  // Guardar producto con actualizaciones dinámicas
-  async saveProduct(product) {
-    showLoading({ 
-      message: 'Guardando producto...',
-      minDuration: 800
-    });
-    
-    try {
-      await fetch('/api/products', {
-        method: 'POST',
-        body: JSON.stringify(product)
-      });
-      
-      // Actualizar mensaje de éxito
-      updateLoading({ 
-        message: '¡Producto guardado!',
-        spinnerColor: '#10b981'
-      });
-      
-      // Esperar antes de ocultar
-      setTimeout(async () => {
-        await hideLoading();
-      }, 1500);
-      
-    } catch (error) {
-      console.error('Error:', error);
-      await hideLoading();
-    }
-  }
-
-  renderProducts() {
-    // Renderizar productos...
-  }
-}
 ```
 
 ### Únete y Contribuye
