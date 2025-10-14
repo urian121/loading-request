@@ -16,19 +16,23 @@
 ## Instalación
 
 ```bash
-  npm install loading-request --save
-  yarn add loading-request
+npm install loading-request --save
+yarn add loading-request
 ```
+
 ## Uso Básico
 
 ### **1. Formulario con Confirmación**
+Ejemplo completo que muestra loading durante el envío, actualiza el mensaje dinámicamente y mantiene feedback visual antes de ocultar.
+Ideal para formularios de contacto, registro o cualquier proceso que requiera confirmación visual al usuario.
+
 ```javascript
-import { showLoading, showLoadingTemp } from 'loading-request';
+import { showLoading, hideLoading, updateLoading } from 'loading-request';
 
 const handleSubmit = async (e) => {
   e.preventDefault();
   
-  const loading = showLoading({
+  showLoading({
     message: 'Enviando mensaje...',
     spinnerColor: '#10b981',
     minDuration: 1000
@@ -37,15 +41,19 @@ const handleSubmit = async (e) => {
   try {
     const formData = new FormData(e.target);
     await fetch('/api/contact', { method: 'POST', body: formData });
-    await loading.hide();
     
-    // Confirmación temporal
-    showLoadingTemp({
+    // Actualizar mensaje de confirmación
+    updateLoading({ 
       message: '¡Mensaje enviado!',
       spinnerColor: '#10b981'
-    }, 3000);
+    });
+    
+    // Esperar un poco antes de ocultar
+    setTimeout(async () => {
+      await hideLoading();
+    }, 2000);
   } catch (error) {
-    await loading.hide();
+    await hideLoading();
   }
 };
 
@@ -53,29 +61,31 @@ document.querySelector('#contactForm').addEventListener('submit', handleSubmit);
 ```
 
 ### **2. Actualización Dinámica**
+A continuación, se muestra cómo actualizar el mensaje y el color del spinner en función del progreso de un proceso. Ideal para procesos que requieren feedback visual en tiempo real.
+
 ```javascript
-import { showLoading } from 'loading-request';
+import { showLoading, updateLoading, hideLoading } from 'loading-request';
 
 const handleProcess = async () => {
-  const loading = showLoading({ message: 'Iniciando...' });
+  showLoading({ message: 'Iniciando...' });
   
   // Actualizar mensaje dinámicamente
   setTimeout(() => {
-    loading.update({ 
+    updateLoading({ 
       message: 'Procesando datos...', 
       spinnerColor: '#ffa500' 
     });
   }, 1000);
   
   setTimeout(() => {
-    loading.update({ 
+    updateLoading({ 
       message: 'Finalizando...', 
       spinnerColor: '#28a745' 
     });
   }, 2000);
   
   setTimeout(async () => {
-    await loading.hide();
+    await hideLoading();
   }, 3000);
 };
 
@@ -83,25 +93,27 @@ document.querySelector('#processBtn').addEventListener('click', handleProcess);
 ```
 
 ### **3. Loading Automático en Peticiones HTTP**
+Para este ejemplo, se muestra cómo mostrar loading automáticamente cuando se realiza una solicitud HTTP y ocultarlo cuando la respuesta se recibe. Ideal para procesos que requieren feedback visual en tiempo real.
+
 ```javascript
-import { showLoading } from 'loading-request';
+import { showLoading, hideLoading } from 'loading-request';
 
 // Función para obtener datos del servidor
 async function obtenerDatos() {
-  const loading = showLoading({ message: 'Cargando usuarios...' });
+  showLoading({ message: 'Cargando usuarios...' });
   try {
     const response = await fetch('/api/usuarios');
     const datos = await response.json();
     console.log(datos);
     return datos;
   } finally {
-    await loading.hide();
+    await hideLoading();
   }
 }
 
 // Función para guardar datos
 async function guardarUsuario(usuario) {
-  const loading = showLoading({ 
+  showLoading({ 
     message: 'Guardando usuario...', 
     spinnerColor: '#10b981' 
   });
@@ -112,7 +124,7 @@ async function guardarUsuario(usuario) {
     });
     alert('Usuario guardado exitosamente');
   } finally {
-    await loading.hide();
+    await hideLoading();
   }
 }
 
@@ -138,33 +150,22 @@ guardarUsuario({ nombre: 'Juan', email: 'juan@email.com' });
 
 ## 📖 Referencia Completa
 
-### **showLoading(config?: LoadingConfig): LoadingInstance**
+### **showLoading(config?: LoadingConfig): void**
 
 Muestra un loading con configuración personalizada.
 
 ```js
-const loading = showLoading({
+showLoading({
   message: 'Procesando...',
   spinnerColor: '#3b82f6',
   minDuration: 1000
 });
 
 // Actualizar mensaje
-loading.update({ message: 'Casi listo...' });
+updateLoading({ message: 'Casi listo...' });
 
-// Ocultar
-await loading.hide();
-```
-
-### **showLoadingTemp(config?: LoadingConfig, duration?: number): LoadingInstance**
-
-Muestra un loading temporal que se oculta automáticamente.
-
-```js
-// Se oculta automáticamente después de 2 segundos
-showLoadingTemp({ 
-  message: '¡Guardado exitosamente!' 
-}, 2000);
+// Ocultar (respeta minDuration automáticamente)
+await hideLoading();
 ```
 
 ## Ejemplo Práctico utilizando Next.js
@@ -172,15 +173,14 @@ showLoadingTemp({
 ```jsx
 'use client';
 import { useState } from 'react';
-import { showLoading, showLoadingTemp } from 'loading-request';
+import { showLoading, updateLoading, hideLoading } from 'loading-request';
 
 export default function ProductPage() {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
 
-  // Cargar productos con loading manual
+  // Cargar productos con loading
   const fetchProducts = async () => {
-    const loading = showLoading({
+    showLoading({
       message: 'Cargando productos...',
       spinnerColor: '#3b82f6'
     });
@@ -192,13 +192,13 @@ export default function ProductPage() {
     } catch (error) {
       console.error('Error:', error);
     } finally {
-      await loading.hide();
+      await hideLoading();
     }
   };
 
   // Eliminar producto con loading dinámico
   const deleteProduct = async (id) => {
-    const loading = showLoading({
+    showLoading({
       message: 'Eliminando producto...',
       spinnerColor: '#ef4444',
       minDuration: 800
@@ -208,22 +208,29 @@ export default function ProductPage() {
       await fetch(`/api/products/${id}`, { method: 'DELETE' });
       
       // Actualizar mensaje de éxito
-      loading.update({ 
+      updateLoading({ 
         message: '¡Eliminado!', 
         spinnerColor: '#10b981' 
       });
       
       // Esperar un poco antes de ocultar
       setTimeout(async () => {
-        await loading.hide();
+        await hideLoading();
         fetchProducts(); // Recargar lista
       }, 1000);
       
     } catch (error) {
-      await loading.hide();
-      showLoadingTemp({
+      await hideLoading();
+      
+      // Mostrar error temporalmente
+      showLoading({
         message: 'Error al eliminar',
-        spinnerColor: '#ef4444'
+        spinnerColor: '#ef4444',
+        minDuration: 0
+      });
+      
+      setTimeout(async () => {
+        await hideLoading();
       }, 2000);
     }
   };
@@ -267,7 +274,7 @@ export default function ApiSimpson() {
     } catch (error) {
       console.error("Error al obtener los datos:", error);
     } finally {
-      hideLoading();
+      await hideLoading();
     }
   };
 
@@ -308,31 +315,30 @@ export default function ApiSimpson() {
 ```js
 <script>
   import svelteLogo from "./assets/svelte.svg";
-
   import { showLoading, hideLoading } from "loading-request";
 
   let personas = null;
- async function fetchPersonas() {
+  
+  async function fetchPersonas() {
+    showLoading({
+      message: "Cargando Solicitud...",
+      spinnerColor: "#f3752b",
+      textColor: "#EE5E09",
+      textSize: "18px",
+    });
 
-      showLoading({
-          message: "Cargando Solicitud...",
-          spinnerColor: "#f3752b",
-          textLoadingColor: "#EE5E09",
-          textLoadingSize: "18px",
-      });
-
-      try {
-        const URL = "https://reqres.in/api/users?page=1";
-        const response = await fetch(URL);
-        if (!response.ok) {
-          throw new Error('Error en la solicitud');
-        }
-        personas = await response.json();
-      } catch (err) {
-        console.log('Error al cargar la API:', err.message);
-      } finally {
-        hideLoading();
+    try {
+      const URL = "https://reqres.in/api/users?page=1";
+      const response = await fetch(URL);
+      if (!response.ok) {
+        throw new Error('Error en la solicitud');
       }
+      personas = await response.json();
+    } catch (err) {
+      console.log('Error al cargar la API:', err.message);
+    } finally {
+      await hideLoading();
+    }
   }
 </script>
 
@@ -342,7 +348,7 @@ export default function ApiSimpson() {
     <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
   </h1>
 
- {#if personas}
+  {#if personas}
     <ul class="user-list">
       {#each personas.data as persona (persona.id)}
         <li class="user-item">
@@ -376,15 +382,18 @@ export default function ApiSimpson() {
 <script setup>
 import { showLoading, hideLoading } from "loading-request";
 
-const handleShowLoading = () => {
+const handleShowLoading = async () => {
   showLoading({
     message: "Cargando App...",
     spinnerColor: "#f3752b",
-    textLoadingColor: "#EE5E09",
-    textLoadingSize: "20px",
+    textColor: "#EE5E09",
+    textSize: "20px",
   });
 
-  hideLoading({ timeLoading: 1000 });
+  // Simular proceso async
+  setTimeout(async () => {
+    await hideLoading();
+  }, 2000);
 };
 </script>
 
@@ -411,18 +420,21 @@ También puedes incluir `loading-request` directamente en tu proyecto utilizando
     <button id="btnLoading">Mostrar Loading</button>
 
     <!-- Incluir el JavaScript de loading-request desde CDN -->
-    <script src="https://unpkg.com/loading-request@2.15.0/dist/loading-request.umd.js"></script>
+    <script src="https://unpkg.com/loading-request@2.15.0/dist/loading-request.min.js"></script>
     <script>
       // Función para mostrar el loading
-      function handleShowLoading() {
-        loadingRequest.showLoading({
+      async function handleShowLoading() {
+        showLoading({
           message: "Cargando App...",
           spinnerColor: "#f3752b",
-          textLoadingColor: "#EE5E09",
-          textLoadingSize: "16px",
+          textColor: "#EE5E09",
+          textSize: "16px",
         });
 
-        loadingRequest.hideLoading({ timeLoading: 1500 });
+        // Simular proceso
+        setTimeout(async () => {
+          await hideLoading();
+        }, 2000);
       }
 
       // Asociar la función al botón
@@ -435,13 +447,13 @@ También puedes incluir `loading-request` directamente en tu proyecto utilizando
 ```
 
 ### Notas importantes sobre el uso con CDN:
-La librería expone un objeto global `loadingRequest` con los métodos `showLoading` y `hideLoading`.
+La librería expone las funciones `showLoading()`, `hideLoading()` y `updateLoading()` que deben ser importadas o usadas directamente.
 
-## API
+## 📚 API Completa
 
-### **showLoading(config?)**
+### **showLoading(config?): void**
 
-Muestra un loading con control total y retorna una instancia para manipularlo.
+Muestra un loading con configuración personalizada.
 
 **Parámetros de configuración**:
 - **message**: Mensaje a mostrar (default: 'Cargando...')
@@ -449,32 +461,49 @@ Muestra un loading con control total y retorna una instancia para manipularlo.
 - **textColor**: Color del texto (default: '#7366ff')
 - **textSize**: Tamaño del texto (default: '16px')
 - **backgroundColor**: Color de fondo (default: '#fff')
-- **opacity**: Opacidad del overlay (default: 0.80)
+- **opacity**: Opacidad del overlay (default: 0.90)
 - **minDuration**: Tiempo mínimo visible en ms (default: 500)
 
-**Retorna**: Instancia con métodos `hide()` y `update(config)`
+```js
+showLoading({
+  message: 'Procesando...',
+  spinnerColor: '#3b82f6',
+  minDuration: 1000
+});
+```
+
+### **hideLoading(): Promise<void>**
+
+Oculta el loading activo respetando automáticamente el `minDuration` configurado.
 
 ```js
-const loading = showLoading({
-  message: 'Procesando...',
-  spinnerColor: '#3b82f6'
+await hideLoading(); // Respeta minDuration automáticamente
+```
+
+### **updateLoading(config): void**
+
+Actualiza la configuración del loading activo en tiempo real.
+
+```js
+updateLoading({ 
+  message: 'Finalizando...', 
+  spinnerColor: '#28a745' 
 });
-await loading.hide();
 ```
 
 ## 🔧 Ejemplo Completo
 
 ```js
-import { showLoading, showLoadingTemp } from 'loading-request';
+import { showLoading, updateLoading, hideLoading } from 'loading-request';
 
 class ProductPage {
   constructor() {
     this.products = [];
   }
 
-  // Cargar productos con loading manual
+  // Cargar productos con loading
   async loadProducts() {
-    const loading = showLoading({ 
+    showLoading({ 
       message: 'Cargando productos...',
       spinnerColor: '#3b82f6'
     });
@@ -486,13 +515,13 @@ class ProductPage {
     } catch (error) {
       console.error('Error:', error);
     } finally {
-      await loading.hide();
+      await hideLoading();
     }
   }
 
-  // Guardar producto con loading temporal
+  // Guardar producto con actualizaciones dinámicas
   async saveProduct(product) {
-    const loading = showLoading({ 
+    showLoading({ 
       message: 'Guardando producto...',
       minDuration: 800
     });
@@ -503,15 +532,20 @@ class ProductPage {
         body: JSON.stringify(product)
       });
       
-      // Mostrar confirmación temporal
-      showLoadingTemp({ 
-        message: '¡Producto guardado!' 
-      }, 2000);
+      // Actualizar mensaje de éxito
+      updateLoading({ 
+        message: '¡Producto guardado!',
+        spinnerColor: '#10b981'
+      });
+      
+      // Esperar antes de ocultar
+      setTimeout(async () => {
+        await hideLoading();
+      }, 1500);
       
     } catch (error) {
       console.error('Error:', error);
-    } finally {
-      await loading.hide();
+      await hideLoading();
     }
   }
 
@@ -519,59 +553,6 @@ class ProductPage {
     // Renderizar productos...
   }
 }
-```
-
-## 📚 API Completa
-
-### **showLoading(config?)**
-
-Muestra un loading con configuración personalizada y retorna una instancia para control total.
-
-**Parámetros:**
-- `config` (opcional): Objeto de configuración
-  - `message`: Texto a mostrar
-  - `spinnerColor`: Color del spinner (hex)
-  - `backgroundColor`: Color de fondo del overlay
-  - `opacity`: Opacidad del overlay (0-1)
-  - `minDuration`: Duración mínima en ms
-
-**Retorna:** `LoadingInstance` con métodos `hide()` y `update(config)`
-
-```js
-const loading = showLoading({
-  message: 'Procesando...',
-  spinnerColor: '#3b82f6',
-  minDuration: 1000
-});
-
-// Actualizar dinámicamente
-loading.update({ message: 'Finalizando...' });
-
-// Ocultar (respeta minDuration)
-await loading.hide();
-```
-
-### **showLoadingTemp(config?, duration?)**
-
-Muestra un loading temporal que se oculta automáticamente.
-
-**Parámetros:**
-- `config` (opcional): Configuración del loading
-- `duration` (opcional): Duración en ms (default: 2000)
-
-```js
-showLoadingTemp({ 
-  message: '¡Guardado exitoso!',
-  spinnerColor: '#10b981'
-}, 3000);
-```
-
-### **hideLoading()**
-
-Oculta cualquier loading activo inmediatamente.
-
-```js
-hideLoading(); // Fuerza el cierre
 ```
 
 ### Únete y Contribuye

@@ -11,11 +11,6 @@ export interface LoadingConfig {
   minDuration?: number;
 }
 
-export interface LoadingInstance {
-  hide: () => Promise<void>;
-  update: (config: Partial<LoadingConfig>) => void;
-}
-
 // Configuración por defecto
 const defaultConfig: LoadingConfig = {
   message: 'Cargando...',
@@ -27,9 +22,11 @@ const defaultConfig: LoadingConfig = {
   minDuration: 500,
 };
 
-// Variables de estado
+// Variables de estado globales
 let stylesInjected = false;
 let currentOverlay: HTMLDivElement | null = null;
+let currentStartTime: number = 0;
+let currentConfig: LoadingConfig = { ...defaultConfig };
 
 // Inyección de estilos optimizada
 const injectStyles = (): void => {
@@ -49,28 +46,27 @@ const injectStyles = (): void => {
 };
 
 /**
- * Muestra un indicador de carga moderno y retorna una instancia para controlarlo
+ * Muestra un indicador de carga moderno
  * 
  * @param config - Configuración opcional del loading
- * @returns Instancia del loading con métodos hide() y update()
  * 
  * @example
  * // Uso básico
- * const loading = showLoading();
+ * showLoading();
  * await fetchData();
- * await loading.hide();
+ * hideLoading();
  * 
  * @example
  * // Con configuración personalizada
- * const loading = showLoading({
+ * showLoading({
  *   message: 'Procesando...',
  *   spinnerColor: '#ff6b6b',
  *   minDuration: 1000
  * });
  */
-export const showLoading = (config: LoadingConfig = {}): LoadingInstance => {
+export const showLoading = (config: LoadingConfig = {}): void => {
   if (typeof window === 'undefined' || typeof document === 'undefined') {
-    return { hide: async () => {}, update: () => {} };
+    return;
   }
 
   injectStyles();
@@ -81,13 +77,13 @@ export const showLoading = (config: LoadingConfig = {}): LoadingInstance => {
     currentOverlay = null;
   }
   
-  const finalConfig = { ...defaultConfig, ...config };
-  const startTime = Date.now();
+  currentConfig = { ...defaultConfig, ...config };
+  currentStartTime = Date.now();
   
   // Crear overlay
   const overlay = document.createElement('div');
   overlay.className = 'loading-overlay';
-  overlay.style.backgroundColor = finalConfig.backgroundColor!;
+  overlay.style.backgroundColor = currentConfig.backgroundColor!;
   
   // Crear contenido
   const content = document.createElement('div');
@@ -96,15 +92,15 @@ export const showLoading = (config: LoadingConfig = {}): LoadingInstance => {
   // Crear spinner
   const spinner = document.createElement('div');
   spinner.className = 'loading-spinner';
-  spinner.style.borderColor = finalConfig.spinnerColor!;
+  spinner.style.borderColor = currentConfig.spinnerColor!;
   spinner.style.borderTopColor = 'transparent';
   
   // Crear texto
   const text = document.createElement('span');
   text.className = 'loading-text';
-  text.textContent = finalConfig.message!;
-  text.style.color = finalConfig.textColor!;
-  text.style.fontSize = finalConfig.textSize!;
+  text.textContent = currentConfig.message!;
+  text.style.color = currentConfig.textColor!;
+  text.style.fontSize = currentConfig.textSize!;
   
   // Ensamblar elementos
   content.appendChild(spinner);
@@ -114,150 +110,83 @@ export const showLoading = (config: LoadingConfig = {}): LoadingInstance => {
   
   // Activar con animación
   requestAnimationFrame(() => {
-    overlay.style.opacity = String(finalConfig.opacity);
+    overlay.style.opacity = String(currentConfig.opacity);
     overlay.classList.add('active');
   });
   
   currentOverlay = overlay;
-  
-  // Función para ocultar con tiempo mínimo garantizado
-  const hide = async (): Promise<void> => {
-    if (!overlay.parentElement) return;
-    
-    const elapsed = Date.now() - startTime;
-    const minDuration = finalConfig.minDuration || 0;
-    const remaining = Math.max(0, minDuration - elapsed);
-    
-    if (remaining > 0) {
-      await new Promise(resolve => setTimeout(resolve, remaining));
-    }
-    
-    overlay.classList.remove('active');
-    overlay.style.opacity = '0';
-    
-    setTimeout(() => {
-      if (overlay.parentElement) {
-        overlay.remove();
-      }
-      if (currentOverlay === overlay) {
-        currentOverlay = null;
-      }
-    }, 300);
-  };
-  
-  // Función para actualizar configuración en tiempo real
-  const update = (newConfig: Partial<LoadingConfig>): void => {
-    if (newConfig.message !== undefined) {
-      text.textContent = newConfig.message;
-    }
-    if (newConfig.spinnerColor !== undefined) {
-      spinner.style.borderColor = newConfig.spinnerColor;
-      spinner.style.borderTopColor = 'transparent';
-    }
-    if (newConfig.textColor !== undefined) {
-      text.style.color = newConfig.textColor;
-    }
-    if (newConfig.textSize !== undefined) {
-      text.style.fontSize = newConfig.textSize;
-    }
-    if (newConfig.backgroundColor !== undefined) {
-      overlay.style.backgroundColor = newConfig.backgroundColor;
-    }
-    if (newConfig.opacity !== undefined) {
-      overlay.style.opacity = String(newConfig.opacity);
-    }
-  };
-  
-  return { hide, update };
 };
 
 /**
- * Oculta cualquier loading activo inmediatamente
+ * Oculta el loading activo respetando el tiempo mínimo configurado
  */
-export const hideLoading = (): void => {
-  if (currentOverlay) {
-    currentOverlay.classList.remove('active');
-    currentOverlay.style.opacity = '0';
-    
-    setTimeout(() => {
-      if (currentOverlay) {
-        currentOverlay.remove();
-        currentOverlay = null;
-      }
-    }, 300);
+export const hideLoading = async (): Promise<void> => {
+  if (!currentOverlay) return;
+  
+  const elapsed = Date.now() - currentStartTime;
+  const minDuration = currentConfig.minDuration || 0;
+  const remaining = Math.max(0, minDuration - elapsed);
+  
+  if (remaining > 0) {
+    await new Promise(resolve => setTimeout(resolve, remaining));
   }
+  
+  currentOverlay.classList.remove('active');
+  currentOverlay.style.opacity = '0';
+  
+  setTimeout(() => {
+    if (currentOverlay) {
+      currentOverlay.remove();
+      currentOverlay = null;
+    }
+  }, 300);
 };
 
 /**
- * Loading temporal que se oculta automáticamente
+ * Actualiza la configuración del loading activo
  * 
- * @param config - Configuración del loading
- * @param duration - Duración en milisegundos
- * @returns Instancia del loading
+ * @param config - Nueva configuración a aplicar
  * 
  * @example
- * showLoadingTemp({ message: '¡Guardado!' }, 2000);
+ * showLoading({ message: 'Cargando...' });
+ * updateLoading({ message: 'Casi listo...' });
+ * hideLoading();
  */
-export const showLoadingTemp = (
-  config: LoadingConfig = {}, 
-  duration: number = 2000
-): LoadingInstance => {
-  const instance = showLoading({ ...config, minDuration: 0 });
+export const updateLoading = (config: Partial<LoadingConfig>): void => {
+  if (!currentOverlay) return;
   
-  setTimeout(async () => {
-    await instance.hide();
-  }, duration);
+  const spinner = currentOverlay.querySelector('.loading-spinner') as HTMLDivElement;
+  const text = currentOverlay.querySelector('.loading-text') as HTMLSpanElement;
   
-  return instance;
-};
-
-// Compatibilidad con versión anterior (deprecated)
-export interface ShowLoadingOptions {
-  message?: string;
-  spinnerColor?: string;
-  textLoadingColor?: string;
-  textLoadingSize?: string;
-}
-
-export interface HideLoadingOptions {
-  timeLoading?: number;
-}
-
-/**
- * @deprecated Usa showLoading() en su lugar
- */
-const showLoadingLegacy = (options: ShowLoadingOptions = {}) => {
-  const config: LoadingConfig = {
-    message: options.message,
-    spinnerColor: options.spinnerColor,
-    textColor: options.textLoadingColor,
-    textSize: options.textLoadingSize,
-  };
+  if (config.message !== undefined && text) {
+    text.textContent = config.message;
+  }
+  if (config.spinnerColor !== undefined && spinner) {
+    spinner.style.borderColor = config.spinnerColor;
+    spinner.style.borderTopColor = 'transparent';
+  }
+  if (config.textColor !== undefined && text) {
+    text.style.color = config.textColor;
+  }
+  if (config.textSize !== undefined && text) {
+    text.style.fontSize = config.textSize;
+  }
+  if (config.backgroundColor !== undefined) {
+    currentOverlay.style.backgroundColor = config.backgroundColor;
+  }
+  if (config.opacity !== undefined) {
+    currentOverlay.style.opacity = String(config.opacity);
+  }
   
-  showLoading(config);
+  // Actualizar configuración actual
+  currentConfig = { ...currentConfig, ...config };
 };
-
-/**
- * @deprecated Usa hideLoading() o loading.hide() en su lugar
- */
-const hideLoadingLegacy = (options: HideLoadingOptions = {}) => {
-  const { timeLoading = 500 } = options;
-  setTimeout(() => {
-    hideLoading();
-  }, timeLoading);
-};
-
-// Exportar funciones legacy para compatibilidad
-export { showLoadingLegacy as showLoading_v1, hideLoadingLegacy as hideLoading_v1 };
 
 // Exposición global para uso directo en browser
 if (typeof window !== 'undefined') {
   (window as any).loadingRequest = {
     show: showLoading,
     hide: hideLoading,
-    showTemp: showLoadingTemp,
-    // Legacy
-    showLoading: showLoadingLegacy,
-    hideLoading: hideLoadingLegacy,
+    update: updateLoading,
   };
 }

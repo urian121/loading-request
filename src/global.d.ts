@@ -6,52 +6,30 @@ declare module "*.css" {
 
 // Declaraciones para la librería loading-request
 declare module 'loading-request' {
-  // Interfaces principales
+  // Interface principal
   export interface LoadingConfig {
     message?: string;
     spinnerColor?: string;
+    textColor?: string;
+    textSize?: string;
     backgroundColor?: string;
     opacity?: number;
     minDuration?: number;
   }
 
-  export interface LoadingInstance {
-    hide(): Promise<void>;
-    update(config: LoadingConfig): void;
-  }
-
-  // API principal moderna
-  export function showLoading(config?: LoadingConfig): LoadingInstance;
-  export function hideLoading(): void;
-  export function showLoadingTemp(config?: LoadingConfig, duration?: number): LoadingInstance;
-
-  // Interfaces legacy (deprecated)
-  export interface ShowLoadingOptions {
-    message?: string;
-    spinnerColor?: string;
-    textLoadingColor?: string;
-    textLoadingSize?: string;
-  }
-
-  export interface HideLoadingOptions {
-    timeLoading?: number;
-  }
-
-  // Funciones legacy (deprecated)
-  export function showLoadingLegacy(message?: string, spinnerColor?: string): void;
-  export function hideLoadingLegacy(): void;
+  // API principal moderna (3 funciones globales)
+  export function showLoading(config?: LoadingConfig): void;
+  export function hideLoading(): Promise<void>;
+  export function updateLoading(config: Partial<LoadingConfig>): void;
 }
 
 // Declaración global para uso directo en browser
 declare global {
   interface Window {
     loadingRequest: {
-      show: (config?: import('loading-request').LoadingConfig) => import('loading-request').LoadingInstance;
-      hide: () => void;
-      showTemp: (config?: import('loading-request').LoadingConfig, duration?: number) => import('loading-request').LoadingInstance;
-      // Legacy
-      showLoading: (message?: string, spinnerColor?: string) => void;
-      hideLoading: () => void;
+      show: (config?: import('loading-request').LoadingConfig) => void;
+      hide: () => Promise<void>;
+      update: (config: Partial<import('loading-request').LoadingConfig>) => void;
     };
   }
 }
