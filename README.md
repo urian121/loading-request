@@ -11,9 +11,11 @@ Mejora la experiencia de usuario con indicadores de carga elegantes y personaliz
 
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/Loading-Request-formulario.gif)
 
+👉 [Ver Código en GitHub](https://github.com/urian121/implementar-loading-request-durante-el-envio-de-formularios-con-reactjs)
+
 ## Instalación
 
-```bash
+```js
 npm install loading-request --save
 yarn add loading-request
 ```
@@ -204,12 +206,6 @@ export default function FastFoodList() {
 }
 ```
 
-## Implementar Loading Request en el envío de un formulario
-
-![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/Loading-Request-formulario.gif)
-
-👉 [Ver Código en GitHub](https://github.com/urian121/implementar-loading-request-durante-el-envio-de-formularios-con-reactjs)
-
 ### Implementación de Filtrado Dinámico en Next.js con Loading Request
 
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/filtrado-dinamico-con-checkbox-en-Nextjs-y-usando-el-paquete-loading-request.gif)
@@ -219,27 +215,6 @@ export default function FastFoodList() {
 
 ![demo](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/checkbox-filters-with-reactjs-loading-request.gif)
 👉 [Ver Código en GitHub](https://github.com/urian121/checkbox-filters-with-reactjs)
-
-## 📖 Referencia Completa
-
-### **showLoading(config?: LoadingConfig): void**
-
-Muestra un loading con configuración personalizada.
-
-```js
-showLoading({
-  message: 'Procesando...',
-  spinnerColor: '#3b82f6',
-  minDuration: 1000
-});
-
-// Actualizar mensaje
-updateLoading({ message: 'Casi listo...' });
-
-// Ocultar (respeta minDuration automáticamente)
-await hideLoading();
-```
-
 
 ## Mostrando Resultados de una API REST en Next.js
 
